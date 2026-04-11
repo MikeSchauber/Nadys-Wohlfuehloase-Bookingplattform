@@ -31,24 +31,18 @@ import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSepa
 const steps = [
     {
         step: 1,
-        title: 'Anliegen',
-        description: 'Wähle den dein Anliegen aus',
-        icon: BookUser,
-    },
-    {
-        step: 2,
         title: 'Standort',
         description: 'Wo möchtest du Buchen',
         icon: MapPin,
     },
     {
-        step: 3,
+        step: 2,
         title: 'Termin',
         description: 'Wähle einen Termin aus',
         icon: Calendar,
     },
     {
-        step: 4,
+        step: 3,
         title: 'Checkout',
         description: 'Bestätige deine Buchung',
         icon: BookCheck
