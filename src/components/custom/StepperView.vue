@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { BookUser, Calendar, MapPin, BookCheck } from 'lucide-vue-next'
+import {  Calendar, MapPin, BookCheck } from 'lucide-vue-next'
 import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSeparator, StepperTitle, StepperTrigger } from '@/components/ui/stepper'
 
 const steps = [
