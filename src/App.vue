@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <router-view class="dark"></router-view>
+  <router-view></router-view>
 </template>

@@ -35,9 +35,10 @@ const props = withDefaults(defineProps<Props>(), {
 
 .button {
   background-color: var(--primary);
+  color: var(--text-foreground);
 }
 
 .button:hover {
-  background-color: var(--muted);
+  background-color: var(--primary-hover);
 }
 </style>
