@@ -31,31 +31,31 @@ import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSepa
 const steps = [
     {
         step: 1,
-        title: '',
+        title: 'Ort',
         description: '',
         icon: MapPin,
     },
     {
         step: 2,
-        title: '',
+        title: 'Service',
         description: '',
         icon: BookIcon,
     },
     {
         step: 3,
-        title: '',
+        title: 'Termin',
         description: '',
         icon: Calendar,
     },
     {
         step: 4,
-        title: '',
+        title: 'Persönliche Daten',
         description: '',
         icon: PersonStanding,
     },
     {
         step: 5,
-        title: '',
+        title: 'Checkout',
         description: '',
         icon: BookCheck
     },
@@ -80,5 +80,11 @@ const steps = [
 
 .icons {
     transform: scale(1.2);
+}
+
+@media(max-width: 800px) {
+    .stepper-text {
+        display: none;
+    }
 }
 </style>

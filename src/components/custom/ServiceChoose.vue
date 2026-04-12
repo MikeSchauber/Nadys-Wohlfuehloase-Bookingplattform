@@ -41,12 +41,13 @@ const uiStore = useUiStore()
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     gap: 34px;
 }
 
 .card {
     width: 100%;
+    min-width: 150px;
     cursor: pointer;
     transition: all 125ms ease-in-out;
     background-color: var(--primary);
