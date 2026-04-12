@@ -19,20 +19,10 @@
 <script setup lang="ts">
 import { useUiStore } from '@/stores/uiStore';
 import StartGreet from '@/components/custom/StartGreet.vue';
-import { ref } from 'vue'
 import ServiceChoose from '@/components/custom/ServiceChoose.vue';
 import StepperView from '@/components/custom/StepperView.vue';
 
 const uiStore = useUiStore()
-
-const services = [
-    "Events",
-    "Massage",
-    "Reiki"
-]
-
-const activeService = ref(0)
-
 </script>
 
 <style scoped>
