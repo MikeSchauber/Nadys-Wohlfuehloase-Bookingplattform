@@ -1,18 +1,18 @@
 <template>
     <div class="main">
-        <!-- <div class="header">
+        <div class="header">
             <a href="https://www.nady-artist-of-live.de/">
                 <Button>
                     <MoveLeft />
                     Zurück zur Webseite
                 </Button>
             </a>
-        </div> -->
-        <StepperView></StepperView>
+        </div>
         <StartGreet v-if="uiStore.greeting"></StartGreet>
         <ServiceChoose v-else></ServiceChoose>
+        <FooterSection></FooterSection>
 
-        <span>Nady's Wohlfühloase 2026</span>
+
     </div>
 </template>
 
@@ -20,7 +20,7 @@
 import { useUiStore } from '@/stores/uiStore';
 import StartGreet from '@/components/custom/StartGreet.vue';
 import ServiceChoose from '@/components/custom/ServiceChoose.vue';
-import StepperView from '@/components/custom/StepperView.vue';
+import FooterSection from '@/components/shared/FooterSection.vue';
 
 const uiStore = useUiStore()
 </script>

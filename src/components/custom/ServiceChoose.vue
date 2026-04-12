@@ -1,16 +1,19 @@
 <template>
     <main class="main-content">
-        <Card class="w-full max-w-sm card">
+
+        <Card @click="router.push('/events')" class="w-full max-w-sm card">
             <CardContent class="card-content">
                 <span>Events</span>
             </CardContent>
         </Card>
-        <Card class="w-full max-w-sm card">
+
+
+        <Card  @click="router.push('/massagen')" class="w-full max-w-sm card">
             <CardContent class="card-content">
                 <span>Massagen</span>
             </CardContent>
         </Card>
-        <Card class="w-full max-w-sm card">
+        <Card @click="router.push('/reiki')" class="w-full max-w-sm card">
             <CardContent class="card-content">
                 <span>Reiki</span>
             </CardContent>
@@ -25,6 +28,10 @@ import {
     Card,
     CardContent,
 } from '@/components/ui/card'
+import { useRouter } from 'vue-router';
+import Button from '../ui/button/Button.vue';
+
+const router = useRouter()
 
 const uiStore = useUiStore()
 </script>
@@ -39,6 +46,7 @@ const uiStore = useUiStore()
 }
 
 .card {
+    width: 100%;
     cursor: pointer;
     transition: all 125ms ease-in-out;
     background-color: var(--primary);

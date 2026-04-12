@@ -1,10 +1,14 @@
 <template>
     <div class="main">
-        <h1>Event Registration</h1>
+        <StepperBookings></StepperBookings>
+        <h1>Massage Booking</h1>
+        <FooterSection />
     </div>
 </template>
 
 <script setup lang="ts">
+import StepperBookings from '@/components/custom/StepperBookings.vue';
+import FooterSection from '@/components/shared/FooterSection.vue';
 import { useUiStore } from '@/stores/uiStore';
 
 const uiStore = useUiStore()

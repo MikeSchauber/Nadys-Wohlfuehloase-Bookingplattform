@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import {  Calendar, MapPin, BookCheck } from 'lucide-vue-next'
+import { Calendar, MapPin, BookCheck, PersonStanding, BookIcon } from 'lucide-vue-next'
 import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSeparator, StepperTitle, StepperTrigger } from '@/components/ui/stepper'
 
 const steps = [
@@ -37,12 +37,24 @@ const steps = [
     },
     {
         step: 2,
+        title: 'Buchung',
+        description: 'Was möchtest du Buchen',
+        icon: BookIcon,
+    },
+    {
+        step: 3,
         title: 'Termin',
         description: 'Wähle einen Termin aus',
         icon: Calendar,
     },
     {
-        step: 3,
+        step: 4,
+        title: 'Person',
+        description: 'Trage deinen Namen und E-Mail ein',
+        icon: PersonStanding,
+    },
+    {
+        step: 5,
         title: 'Checkout',
         description: 'Bestätige deine Buchung',
         icon: BookCheck

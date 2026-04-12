@@ -1,10 +1,13 @@
 <template>
     <div class="main">
+        <StepperRegistration></StepperRegistration>
         <h1>Event Registration</h1>
+        <FooterSection />
     </div>
 </template>
 
 <script setup lang="ts">
+import StepperRegistration from '@/components/custom/StepperRegistration.vue';
 import { useUiStore } from '@/stores/uiStore';
 
 const uiStore = useUiStore()
