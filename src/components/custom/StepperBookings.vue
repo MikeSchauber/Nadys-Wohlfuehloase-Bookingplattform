@@ -1,9 +1,9 @@
 <template>
-    <Stepper class="flex w-10/12 items-start gap-2">
+    <Stepper class="flex w-10/12 items-start gap-2 stepper-container">
         <StepperItem v-for="item in steps" :key="item.step" :step="item.step"
             class="relative flex w-full flex-col items-center justify-center">
             <StepperTrigger>
-                <StepperIndicator v-slot="{ step }" class="bg-muted">
+                <StepperIndicator v-slot="{ step }" class="bg-muted icons">
                     <template v-if="item.icon">
                         <component :is="item.icon" class="w-4 h-4" />
                     </template>
@@ -31,32 +31,32 @@ import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSepa
 const steps = [
     {
         step: 1,
-        title: 'Standort',
-        description: 'Wo möchtest du Buchen',
+        title: '',
+        description: '',
         icon: MapPin,
     },
     {
         step: 2,
-        title: 'Buchung',
-        description: 'Was möchtest du Buchen',
+        title: '',
+        description: '',
         icon: BookIcon,
     },
     {
         step: 3,
-        title: 'Termin',
-        description: 'Wähle einen Termin aus',
+        title: '',
+        description: '',
         icon: Calendar,
     },
     {
         step: 4,
-        title: 'Person',
-        description: 'Trage deinen Namen und E-Mail ein',
+        title: '',
+        description: '',
         icon: PersonStanding,
     },
     {
         step: 5,
-        title: 'Checkout',
-        description: 'Bestätige deine Buchung',
+        title: '',
+        description: '',
         icon: BookCheck
     },
 ]
@@ -64,6 +64,10 @@ const steps = [
 
 
 <style scoped>
+.stepper-container {
+    width: 100%;
+}
+
 .stepper-text {
     >h4 {
         color: var(--primary);
@@ -72,6 +76,9 @@ const steps = [
     >p {
         color: var(--primary)
     }
+}
 
+.icons {
+    transform: scale(1.2);
 }
 </style>

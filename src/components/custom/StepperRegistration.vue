@@ -1,9 +1,9 @@
 <template>
-    <Stepper class="flex w-10/12 items-start gap-2">
+    <Stepper class="flex w-10/12 items-start gap-2 stepper-container">
         <StepperItem v-for="item in steps" :key="item.step" :step="item.step"
             class="relative flex w-full flex-col items-center justify-center">
             <StepperTrigger>
-                <StepperIndicator v-slot="{ step }" class="bg-muted">
+                <StepperIndicator v-slot="{ step }" class="bg-muted icons">
                     <template v-if="item.icon">
                         <component :is="item.icon" class="w-4 h-4" />
                     </template>
@@ -59,7 +59,12 @@ const steps = [
 
 
 <style scoped>
+.stepper-container {
+    width: 100%;
+}
+
 .stepper-text {
+
     >h4 {
         color: var(--primary);
     }
@@ -68,5 +73,9 @@ const steps = [
         color: var(--primary)
     }
 
+}
+
+.icons {
+    transform: scale(1.2);
 }
 </style>
