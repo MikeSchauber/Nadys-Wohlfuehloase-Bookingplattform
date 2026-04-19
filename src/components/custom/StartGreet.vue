@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue';
-import { useUiStore } from '@/stores/uiStore';
+import { useNavigationStore } from '@/stores/navigationStore';
 
-const uiStore = useUiStore()
+const uiStore = useNavigationStore()
 </script>
 
 <style scoped>

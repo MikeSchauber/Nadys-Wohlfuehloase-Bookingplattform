@@ -1,7 +1,15 @@
 <template>
     <div class="main">
         <StepperBookings></StepperBookings>
-        <h1>Massage Booking</h1>
+
+        <main>
+            <div>
+                <h1>Massage Bookings</h1>
+            </div>
+            <div>
+                <h1>Massage Bookings</h1>
+            </div>
+        </main>
         <FooterSection />
     </div>
 </template>
