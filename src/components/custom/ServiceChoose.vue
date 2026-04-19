@@ -1,39 +1,51 @@
 <template>
     <main class="main-content">
 
-        <Card @click="router.push('/events')" class="w-full max-w-sm card">
+        <Card v-for="serviceType in serviceTypes" @click="startServiceProcess(serviceType.name)"
+            class="w-full max-w-sm card">
             <CardContent class="card-content">
-                <span>Events</span>
-            </CardContent>
-        </Card>
-
-
-        <Card  @click="router.push('/massagen')" class="w-full max-w-sm card">
-            <CardContent class="card-content">
-                <span>Massagen</span>
-            </CardContent>
-        </Card>
-        <Card @click="router.push('/reiki')" class="w-full max-w-sm card">
-            <CardContent class="card-content">
-                <span>Reiki</span>
+                <span>{{ serviceType.name }}</span>
             </CardContent>
         </Card>
     </main>
 </template>
 
 <script setup lang="ts">
-import { useUiStore } from '@/stores/uiStore';
-
 import {
     Card,
     CardContent,
 } from '@/components/ui/card'
-import { useRouter } from 'vue-router';
-import Button from '../ui/button/Button.vue';
+import { useBookingStore } from '@/stores/bookingStore';
+import type { ServiceTypes } from '@/interfaces/interfaces';
+import { onMounted, ref } from 'vue';
+import { getTableData } from '@/services/databaseService';
 
-const router = useRouter()
+const bookingStore = useBookingStore();
 
-const uiStore = useUiStore()
+const serviceTypes = ref<ServiceTypes[]>([])
+
+onMounted(async () => {
+    serviceTypes.value = await getTableData("serviceTypes", "name", true)
+})
+
+function startServiceProcess(serviceType: string) {
+    console.log(serviceType);
+
+    if (serviceType === "Event") {
+        bookingStore.setServiceToEvent()
+    }
+    if (serviceType === "Massage") {
+        bookingStore.setServiceToMassage()
+    }
+    if (serviceType === "Reiki") {
+        bookingStore.setServiceToReiki()
+    }
+
+    console.log(bookingStore.service);
+
+}
+
+
 </script>
 
 <style scoped>
