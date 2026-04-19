@@ -1,7 +1,6 @@
+import BookingRegistration from "@/pages/BookingRegistration.vue";
 import EventRegistration from "@/pages/EventRegistration.vue";
 import MainLayout from "@/pages/MainLayout.vue";
-import MassageBooking from "@/pages/MassageBooking.vue";
-import ReikiBooking from "@/pages/ReikiBooking.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -9,8 +8,7 @@ const router = createRouter({
   routes: [
     { path: "/", component: MainLayout },
     { path: "/events", component: EventRegistration },
-    { path: "/massagen", component: MassageBooking },
-    { path: "/reiki", component: ReikiBooking },
+    { path: "/bookings", component: BookingRegistration },
   ],
 });
 

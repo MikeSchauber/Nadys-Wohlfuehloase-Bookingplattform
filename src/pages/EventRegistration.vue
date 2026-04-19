@@ -8,9 +8,9 @@
 
 <script setup lang="ts">
 import StepperRegistration from '@/components/custom/StepperRegistration.vue';
-import { useUiStore } from '@/stores/uiStore';
+import FooterSection from '@/components/shared/FooterSection.vue';
 
-const uiStore = useUiStore()
+
 </script>
 
 <style scoped>

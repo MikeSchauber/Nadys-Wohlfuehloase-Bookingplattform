@@ -4,37 +4,37 @@ import { useRouter } from "vue-router";
 
 export const useBookingStore = defineStore("booking", {
   state: () => ({
-    service: {
-      event: false,
-      massage: false,
-      reiki: false,
-    } as Service,
+    service: "",
     router: useRouter(),
-    location: {
-        
-    }
+    location: {},
   }),
   getters: {},
   actions: {
+    evaluateServiceQuestion(serviceName: string) {
+      if (serviceName === "Event") {
+        this.setServiceToEvent();
+      }
+      if (serviceName === "Massage") {
+        this.setServiceToMassage();
+      }
+      if (serviceName === "Reiki") {
+        this.setServiceToReiki();
+      }
+    },
+
     setServiceToEvent() {
-      this.resetServices();
-      this.service.event = true;
-      this.router.push("/event");
+      this.service = "event";
+      this.router.push("/events");
     },
+
     setServiceToMassage() {
-      this.resetServices();
-      this.service.massage = true;
-      this.router.push("/massagen");
+      this.service = "massage";
+      this.router.push("/bookings");
     },
+
     setServiceToReiki() {
-      this.resetServices();
-      this.service.reiki = true;
-      this.router.push("/reiki");
-    },
-    resetServices() {
-      this.service.event = false;
-      this.service.massage = false;
-      this.service.reiki = false;
+      this.service = "reiki";
+      this.router.push("/bookings");
     },
   },
 });

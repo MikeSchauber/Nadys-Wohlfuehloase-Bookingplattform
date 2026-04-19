@@ -28,23 +28,9 @@ onMounted(async () => {
     serviceTypes.value = await getTableData("serviceTypes", "name", true)
 })
 
-function startServiceProcess(serviceType: string) {
-    console.log(serviceType);
-
-    if (serviceType === "Event") {
-        bookingStore.setServiceToEvent()
-    }
-    if (serviceType === "Massage") {
-        bookingStore.setServiceToMassage()
-    }
-    if (serviceType === "Reiki") {
-        bookingStore.setServiceToReiki()
-    }
-
-    console.log(bookingStore.service);
-
+function startServiceProcess(serviceName: string) {
+    bookingStore.evaluateServiceQuestion(serviceName)
 }
-
 
 </script>
 

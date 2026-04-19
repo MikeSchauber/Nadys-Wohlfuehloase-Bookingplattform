@@ -50,8 +50,8 @@ const steps = [
 
     {
         step: 4,
-        title: 'Checkout',
-        description: 'Bestätige deine Buchung',
+        title: 'Anmeldung',
+        description: 'Bestätige deine Daten',
         icon: BookCheck
     },
 ]
