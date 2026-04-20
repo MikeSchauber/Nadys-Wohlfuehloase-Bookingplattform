@@ -37,19 +37,25 @@ const steps = [
     },
     {
         step: 2,
+        title: 'Massage',
+        description: 'Wonach ist dir',
+        icon: MapPin,
+    },
+    {
+        step: 3,
         title: 'Termin',
         description: 'Wähle einen Termin aus',
         icon: Calendar,
     },
     {
-        step: 3,
+        step: 4,
         title: 'Person',
         description: 'Sag mir deinen Namen',
         icon: PersonStanding,
     },
 
     {
-        step: 4,
+        step: 5,
         title: 'Buchung',
         description: 'Bestätige deine Daten',
         icon: BookCheck

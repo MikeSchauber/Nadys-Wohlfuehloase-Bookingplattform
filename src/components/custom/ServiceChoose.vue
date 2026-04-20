@@ -1,12 +1,18 @@
 <template>
-    <main class="main-content">
 
-        <Card v-for="serviceType in serviceTypes" @click="startServiceProcess(serviceType.name)"
-            class="w-full max-w-sm card">
-            <CardContent class="card-content">
-                <span>{{ serviceType.name }}</span>
-            </CardContent>
-        </Card>
+    <main class="main-content">
+        <div>
+            <h1>Meine Angebote</h1>
+            <h3>Was kann ich für dich tun ?</h3>
+        </div>
+        <div class="cards">
+            <Card v-for="serviceType in serviceTypes" @click="startServiceProcess(serviceType.name)"
+                class="w-full max-w-sm card">
+                <CardContent class="card-content">
+                    <span>{{ serviceType.name }}</span>
+                </CardContent>
+            </Card>
+        </div>
     </main>
 </template>
 
@@ -30,6 +36,8 @@ onMounted(async () => {
 
 function startServiceProcess(serviceName: string) {
     bookingStore.evaluateServiceQuestion(serviceName)
+    console.log(bookingStore.service);
+
 }
 
 </script>
@@ -39,7 +47,7 @@ function startServiceProcess(serviceName: string) {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     gap: 34px;
 }
 
@@ -50,6 +58,7 @@ function startServiceProcess(serviceName: string) {
     transition: all 125ms ease-in-out;
     background-color: var(--primary);
 
+
     &:hover {
         transform: scale(1.025);
         box-shadow: 0px 0px 4px 2px var(--secondary);
@@ -59,5 +68,10 @@ function startServiceProcess(serviceName: string) {
 .card-content {
     font-weight: 500;
     color: var(--primary-foreground);
+}
+
+.cards {
+    display: flex;
+    gap: 34px;
 }
 </style>

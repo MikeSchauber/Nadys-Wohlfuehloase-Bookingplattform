@@ -4,17 +4,19 @@
             <h1>Nady's Buchungsportal</h1>
             <h2>by Nady's Wohlfühloase</h2>
         </div>
-        <div @click="uiStore.startBooking()">
-            <Button variant="outline">Buchung Starten</Button>
+        <div>
+            <Button @click="router.push('/service')" variant="outline">Buchung Starten</Button>
         </div>
     </main>
 </template>
 
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue';
-import { useNavigationStore } from '@/stores/navigationStore';
+import { useRouter } from 'vue-router';
 
-const uiStore = useNavigationStore()
+
+const router = useRouter()
+
 </script>
 
 <style scoped>

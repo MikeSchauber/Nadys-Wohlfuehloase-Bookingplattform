@@ -3,20 +3,26 @@
         <StepperBookings></StepperBookings>
 
         <main>
-            <div>
+            <div v-if="bookingStore.service === 'massage'">
                 <h1>Massage Bookings</h1>
             </div>
-            <div>
-                <h1>Massage Bookings</h1>
+            <div v-if="bookingStore.service === 'reiki'">
+                <h1>Reiki Bookings</h1>
             </div>
         </main>
-        <FooterSection />
+
+        <div></div>
     </div>
 </template>
 
 <script setup lang="ts">
 import StepperBookings from '@/components/custom/StepperBookings.vue';
-import FooterSection from '@/components/shared/FooterSection.vue';
+import { useBookingStore } from '@/stores/bookingStore';
+
+const bookingStore = useBookingStore()
+
+
+
 </script>
 
 <style scoped>

@@ -20,6 +20,8 @@ export const useBookingStore = defineStore("booking", {
       if (serviceName === "Reiki") {
         this.setServiceToReiki();
       }
+      console.log(this.service);
+      
     },
 
     setServiceToEvent() {
