@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 // but it's best to use the name of the store and surround it with `use`
 // and `Store` (e.g. `useUserStore`, `useCartStore`, `useProductStore`)
 // the first argument is a unique id of the store across your application
-export const useUiStore = defineStore("ui", {
+export const useNavigationStore = defineStore("navigation", {
   state: () => ({
     greeting: true,
   }),
@@ -13,8 +13,8 @@ export const useUiStore = defineStore("ui", {
     startBooking() {
       this.greeting = false;
     },
-    // renderGreeting() {
-    //   this.greeting = true;
-    // },
+    renderGreeting() {
+      this.greeting = true;
+    },
   },
 });

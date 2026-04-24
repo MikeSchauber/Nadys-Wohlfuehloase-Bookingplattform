@@ -1,16 +1,18 @@
 <template>
     <div class="main">
+
         <StepperRegistration></StepperRegistration>
-        <h1>Event Registration</h1>
-        <FooterSection />
+        <main>
+            <h1>Event Registration</h1>
+        </main>
+        <div></div>
     </div>
 </template>
 
 <script setup lang="ts">
 import StepperRegistration from '@/components/custom/StepperRegistration.vue';
-import { useUiStore } from '@/stores/uiStore';
 
-const uiStore = useUiStore()
+
 </script>
 
 <style scoped>
@@ -18,7 +20,7 @@ const uiStore = useUiStore()
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
     padding: 20px 40px;
 }

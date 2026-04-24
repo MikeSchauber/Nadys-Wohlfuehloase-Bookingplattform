@@ -1,15 +1,14 @@
 <template>
     <div class="main">
         <div class="header">
-            <a href="https://www.nady-artist-of-live.de/">
+            <a v-if="route.path === '/'" href="https://www.nady-artist-of-live.de/">
                 <Button>
                     <MoveLeft />
                     Zurück zur Webseite
                 </Button>
             </a>
         </div>
-        <StartGreet v-if="uiStore.greeting"></StartGreet>
-        <ServiceChoose v-else></ServiceChoose>
+        <router-view></router-view>
         <FooterSection></FooterSection>
 
 
@@ -17,12 +16,30 @@
 </template>
 
 <script setup lang="ts">
-import { useUiStore } from '@/stores/uiStore';
+
 import StartGreet from '@/components/custom/StartGreet.vue';
 import ServiceChoose from '@/components/custom/ServiceChoose.vue';
 import FooterSection from '@/components/shared/FooterSection.vue';
+import Button from '@/components/ui/button/Button.vue';
+import { MoveLeft } from 'lucide-vue-next';
+import { useNavigationStore } from '@/stores/navigationStore';
+import { onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useBookingStore } from '@/stores/bookingStore';
 
-const uiStore = useUiStore()
+const bookingStore = useBookingStore()
+const uiStore = useNavigationStore()
+const router = useRouter()
+const route = useRoute()
+
+
+onMounted(() => {
+    console.log(bookingStore.service);
+
+    if (bookingStore.service === "") {
+        router.push("/")
+    }
+})
 </script>
 
 <style scoped>
