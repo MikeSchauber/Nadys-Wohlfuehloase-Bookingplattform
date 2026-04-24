@@ -1,0 +1,642 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#874295;
+  --primary-dark:#620674;
+  --primary-hover:oklch(47.849% 0.22064 294.467 / 0.548);
+  --secondary:oklch(0.94 0.03 295);
+  --secondary-fg:oklch(0.28 0.05 295);
+  --accent-bg:rgba(170,59,255,0.08);
+  --accent-border:rgba(170,59,255,0.35);
+  --muted:oklch(0.96 0.01 295);
+  --muted-fg:oklch(0.45 0.04 295);
+  --border:oklch(0.88 0.04 295);
+  --bg:#fff;
+  --text-h:#08060d;
+  --text-fg:#620674;
+  --code-bg:#f4f3ec;
+  --social-bg:rgba(244,243,236,0.5);
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-body:'Inter',sans-serif;
+  --radius:0.625rem;
+}
+body{font-family:var(--ff-body);background:var(--bg);color:var(--text-h);font-size:13px}
+.app{display:flex;flex-direction:column;min-height:100vh}
+
+/* NAV */
+nav{background:var(--primary-dark);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px}
+.nav-logo{font-family:var(--ff-display);font-size:22px;font-weight:300;color:#fff;letter-spacing:0.04em;font-style:italic}
+.nav-tabs{display:flex;gap:2px}
+.nav-tab{background:none;border:none;color:rgba(255,255,255,0.5);font-family:var(--ff-body);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;cursor:pointer;transition:all 0.2s;border-bottom:2px solid transparent}
+.nav-tab:hover{color:rgba(255,255,255,0.85)}
+.nav-tab.active{color:#fff;border-bottom-color:rgba(170,59,255,0.7)}
+.nav-badge{background:#c084d4;color:#fff;border-radius:10px;font-size:10px;padding:1px 6px;margin-left:5px}
+.screen{display:none}.screen.active{display:block}
+
+/* BOOKING HERO */
+.booking-hero{background:linear-gradient(150deg,var(--primary-dark) 0%,var(--primary) 60%,oklch(0.6 0.18 295) 100%);padding:36px 28px 28px;position:relative;overflow:hidden}
+.booking-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.05)}
+.booking-hero::after{content:'';position:absolute;bottom:-40px;left:40px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.04)}
+.booking-hero-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:6px;font-weight:500}
+.booking-hero h1{font-family:var(--ff-display);font-size:34px;font-weight:300;color:#fff;line-height:1.2;margin-bottom:6px}
+.booking-hero p{font-size:12px;color:rgba(255,255,255,0.65);font-weight:300;letter-spacing:0.04em}
+
+/* STEPS */
+.booking-body{padding:22px}
+.step-indicator{display:flex;align-items:center;gap:6px;margin-bottom:26px}
+.step{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted-fg)}
+.step-dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--muted-fg);flex-shrink:0}
+.step.done .step-dot{background:var(--primary);border-color:var(--primary);color:#fff}
+.step.active .step-dot{border-color:var(--primary);color:var(--primary);background:var(--accent-bg)}
+.step.active{color:var(--primary-dark);font-weight:600}
+.step-line{flex:1;height:1px;background:var(--border)}
+.section-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:10px;font-weight:600}
+
+/* SERVICE CARDS */
+.service-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:22px}
+.service-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:all 0.18s;position:relative}
+.service-card:hover{border-color:var(--primary);box-shadow:0 0 0 3px var(--accent-bg)}
+.service-card.selected{border-color:var(--primary);background:var(--accent-bg)}
+.service-card.selected::after{content:'✓';position:absolute;top:9px;right:11px;color:var(--primary);font-size:11px;font-weight:600}
+.service-icon{width:34px;height:34px;border-radius:8px;background:var(--secondary);display:flex;align-items:center;justify-content:center;margin-bottom:9px;font-size:17px}
+.service-name{font-size:12px;font-weight:600;color:var(--text-h);margin-bottom:2px}
+.service-detail{font-size:10px;color:var(--muted-fg)}
+.service-price{font-size:11px;color:var(--primary);font-weight:600;margin-top:5px}
+
+/* LOCATION */
+.location-row{display:flex;gap:9px;margin-bottom:22px}
+.loc-btn{flex:1;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;cursor:pointer;transition:all 0.18s;text-align:left;font-family:var(--ff-body)}
+.loc-btn:hover,.loc-btn.selected{border-color:var(--primary);background:var(--accent-bg)}
+.loc-btn-name{font-size:12px;font-weight:600;color:var(--text-h)}
+.loc-btn-sub{font-size:10px;color:var(--muted-fg);margin-top:2px}
+
+/* CALENDAR */
+.calendar-strip{display:flex;gap:6px;margin-bottom:18px;overflow-x:auto;padding-bottom:3px}
+.cal-day{min-width:50px;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:9px 5px;text-align:center;cursor:pointer;transition:all 0.18s}
+.cal-day:hover,.cal-day.selected{border-color:var(--primary);background:var(--accent-bg)}
+.cal-day.unavail{opacity:0.3;cursor:default}
+.cal-day-name{font-size:9px;color:var(--muted-fg);text-transform:uppercase;letter-spacing:0.06em;font-weight:500}
+.cal-day-num{font-size:17px;font-family:var(--ff-display);font-weight:400;color:var(--text-h);margin:2px 0}
+.cal-day.selected .cal-day-num{color:var(--primary-dark);font-weight:600}
+
+/* TIME */
+.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:22px}
+.time-btn{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:9px;text-align:center;cursor:pointer;font-size:12px;font-weight:400;color:var(--text-h);font-family:var(--ff-body);transition:all 0.18s}
+.time-btn:hover,.time-btn.selected{border-color:var(--primary);background:var(--accent-bg);color:var(--primary-dark);font-weight:600}
+.time-btn.busy{opacity:0.28;cursor:default;text-decoration:line-through}
+
+/* FORM */
+.form-group{margin-bottom:12px}
+.form-label{font-size:10px;letter-spacing:0.06em;color:var(--muted-fg);margin-bottom:4px;display:block;text-transform:uppercase;font-weight:600}
+.form-input{width:100%;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 13px;font-family:var(--ff-body);font-size:12px;color:var(--text-h);outline:none;transition:border-color 0.2s}
+.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--accent-bg)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+
+/* BUTTONS */
+.btn-primary{width:100%;background:var(--primary);color:#fff;border:none;border-radius:var(--radius);padding:13px;font-family:var(--ff-body);font-size:12px;font-weight:600;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-secondary{width:100%;background:#fff;color:var(--text-h);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;font-family:var(--ff-body);font-size:12px;cursor:pointer;transition:all 0.2s;font-weight:500}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);background:var(--accent-bg)}
+
+/* SUMMARY & SUCCESS */
+.booking-summary{background:var(--accent-bg);border:1.5px solid var(--accent-border);border-radius:var(--radius);padding:16px;margin-bottom:18px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--accent-border)}
+.summary-row:last-child{border-bottom:none;font-weight:600}
+.summary-label{font-size:11px;color:var(--muted-fg)}
+.summary-value{font-size:12px;color:var(--text-h)}
+.success-card{background:var(--accent-bg);border:1.5px solid var(--accent-border);border-radius:12px;padding:22px;text-align:center;margin-bottom:18px}
+.success-icon{width:52px;height:52px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px;color:#fff}
+.success-title{font-family:var(--ff-display);font-size:22px;font-weight:400;color:var(--primary-dark);margin-bottom:5px}
+.success-sub{font-size:11px;color:var(--muted-fg);line-height:1.8}
+
+/* VOUCHER */
+.voucher-input-row{display:flex;gap:7px;margin-bottom:12px}
+.voucher-input-row .form-input{margin:0}
+.voucher-btn{background:var(--primary-dark);color:#fff;border:none;border-radius:var(--radius);padding:0 16px;font-family:var(--ff-body);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;letter-spacing:0.05em}
+
+/* EVENTS */
+.events-header{background:linear-gradient(150deg,var(--primary-dark) 0%,var(--primary) 100%);padding:26px 24px}
+.events-header h2{font-family:var(--ff-display);font-size:28px;font-weight:300;color:#fff;font-style:italic}
+.events-header p{font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px;letter-spacing:0.04em}
+.events-body{padding:18px}
+.event-card{background:#fff;border-radius:12px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:13px}
+.event-banner{height:86px;display:flex;align-items:center;padding:18px;gap:14px}
+.event-banner.purple{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 100%)}
+.event-banner.violet{background:linear-gradient(135deg,oklch(0.38 0.18 295) 0%,oklch(0.5 0.2 280) 100%)}
+.event-banner.lavender{background:linear-gradient(135deg,oklch(0.5 0.15 305) 0%,oklch(0.65 0.12 290) 100%)}
+.event-date-badge{background:rgba(255,255,255,0.15);border-radius:8px;padding:9px;text-align:center;min-width:50px}
+.event-date-day{font-size:20px;font-family:var(--ff-display);color:#fff;font-weight:300;line-height:1}
+.event-date-mon{font-size:9px;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.08em;font-weight:500}
+.event-title-area h3{font-family:var(--ff-display);font-size:17px;font-weight:400;color:#fff;font-style:italic}
+.event-title-area p{font-size:10px;color:rgba(255,255,255,0.6);margin-top:2px}
+.event-body{padding:14px}
+.event-meta{display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.event-meta-item{font-size:10px;color:var(--muted-fg);display:flex;align-items:center;gap:4px;font-weight:500}
+.event-desc{font-size:11px;color:var(--text-h);line-height:1.7;margin-bottom:12px}
+.event-register-btn{background:var(--primary);color:#fff;border:none;border-radius:var(--radius);padding:10px 18px;font-family:var(--ff-body);font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:background 0.2s}
+.event-register-btn:hover{background:var(--primary-dark)}
+
+/* ADMIN */
+.admin-layout{display:flex;min-height:calc(100vh - 56px)}
+.admin-sidebar{width:196px;background:var(--primary-dark);padding:16px 0;flex-shrink:0}
+.admin-nav-item{display:flex;align-items:center;gap:9px;padding:11px 18px;font-size:11px;color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.18s;border-left:3px solid transparent;letter-spacing:0.04em;font-weight:500}
+.admin-nav-item:hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.05)}
+.admin-nav-item.active{color:#fff;border-left-color:rgba(170,59,255,0.7);background:rgba(255,255,255,0.08)}
+.admin-nav-icon{font-size:14px;width:16px;text-align:center}
+.admin-main{flex:1;padding:22px;background:var(--muted);overflow:auto}
+.admin-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.admin-title{font-family:var(--ff-display);font-size:24px;font-weight:400;color:var(--text-h)}
+.admin-date{font-size:11px;color:var(--muted-fg)}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.stat-card{background:#fff;border-radius:var(--radius);padding:16px;border:1.5px solid var(--border)}
+.stat-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:5px;font-weight:600}
+.stat-value{font-size:24px;font-family:var(--ff-display);font-weight:400;color:var(--text-h)}
+.stat-sub{font-size:10px;color:var(--muted-fg);margin-top:3px}
+.stat-card.p1{border-top:3px solid var(--primary)}
+.stat-card.p2{border-top:3px solid oklch(0.6 0.18 295)}
+.stat-card.p3{border-top:3px solid oklch(0.7 0.14 295)}
+.stat-card.p4{border-top:3px solid var(--primary-dark)}
+
+/* PANELS */
+.admin-panels{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
+.admin-panel{background:#fff;border-radius:var(--radius);border:1.5px solid var(--border);overflow:hidden}
+.admin-panel-header{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
+.admin-panel-title{font-size:12px;font-weight:600;color:var(--text-h)}
+.admin-panel-action{font-size:10px;color:var(--primary);cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;font-weight:600}
+.booking-row{display:flex;align-items:center;gap:10px;padding:11px 18px;border-bottom:1px solid var(--border);transition:background 0.15s;cursor:pointer}
+.booking-row:hover{background:var(--accent-bg)}
+.booking-row:last-child{border-bottom:none}
+.booking-avatar{width:32px;height:32px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--primary-dark);flex-shrink:0}
+.booking-info{flex:1}
+.booking-name{font-size:12px;font-weight:600;color:var(--text-h)}
+.booking-meta{font-size:10px;color:var(--muted-fg);margin-top:1px}
+.booking-status{padding:2px 9px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.status-requested{background:oklch(0.96 0.06 295);color:oklch(0.35 0.15 295)}
+.status-confirmed{background:var(--accent-bg);color:var(--primary-dark)}
+.status-cancelled{background:#fce8f0;color:#8b1a4a}
+.booking-action-btns{display:flex;gap:5px}
+.mini-btn{padding:4px 10px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer;border:1.5px solid;letter-spacing:0.04em;font-family:var(--ff-body)}
+.mini-btn.confirm{border-color:var(--accent-border);color:var(--primary);background:var(--accent-bg)}
+.mini-btn.cancel{border-color:#f0c0d0;color:#8b1a4a;background:#fce8f0}
+
+/* MINI CALENDAR */
+.calendar-mini{padding:14px 18px}
+.cal-mini-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.cal-mini-month{font-size:12px;font-weight:600;color:var(--text-h)}
+.cal-mini-nav{background:none;border:none;color:var(--muted-fg);cursor:pointer;font-size:13px;padding:3px}
+.cal-mini-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
+.cal-mini-day-name{font-size:9px;color:var(--muted-fg);text-transform:uppercase;padding:3px 0;letter-spacing:0.05em;font-weight:600}
+.cal-mini-cell{font-size:11px;color:var(--text-h);padding:4px 2px;border-radius:5px;cursor:pointer;transition:background 0.15s}
+.cal-mini-cell:hover{background:var(--accent-bg)}
+.cal-mini-cell.has-booking{background:var(--secondary);color:var(--primary-dark);font-weight:600}
+.cal-mini-cell.today{background:var(--primary);color:#fff;font-weight:600}
+.cal-mini-cell.empty{cursor:default}
+
+/* QUICK ACTIONS */
+.quick-actions{display:flex;flex-direction:column;gap:6px;padding:12px 18px}
+.quick-action{display:flex;align-items:center;gap:9px;padding:10px 12px;background:var(--muted);border-radius:var(--radius);cursor:pointer;transition:background 0.15s}
+.quick-action:hover{background:var(--accent-bg)}
+.quick-action-icon{font-size:15px;width:30px;height:30px;background:#fff;border:1.5px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.quick-action-text{font-size:11px;color:var(--text-h);font-weight:600}
+.quick-action-sub{font-size:10px;color:var(--muted-fg);margin-top:1px}
+
+/* SERVICES */
+.services-list{padding:0 18px}
+.service-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}
+.service-row:last-child{border-bottom:none}
+.service-row-name{font-size:12px;font-weight:600;color:var(--text-h)}
+.service-row-meta{font-size:10px;color:var(--muted-fg);margin-top:1px}
+.service-row-price{font-size:12px;font-weight:600;color:var(--primary);margin:0 12px}
+.toggle-switch{width:34px;height:19px;border-radius:9px;background:var(--primary);cursor:pointer;position:relative;border:none;transition:background 0.2s;flex-shrink:0}
+.toggle-switch.off{background:var(--border)}
+.toggle-switch::after{content:'';position:absolute;width:13px;height:13px;border-radius:50%;background:#fff;top:3px;right:3px;transition:right 0.2s}
+.toggle-switch.off::after{right:auto;left:3px}
+
+/* VOUCHERS */
+.voucher-row{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--border)}
+.voucher-code{font-family:monospace;font-size:12px;color:var(--primary-dark);background:var(--secondary);padding:3px 9px;border-radius:5px;font-weight:700}
+.voucher-info{font-size:10px;color:var(--muted-fg);margin-top:2px}
+.voucher-status-active{font-size:10px;color:var(--primary);background:var(--accent-bg);padding:2px 8px;border-radius:4px;font-weight:600;border:1px solid var(--accent-border)}
+
+/* BOOKING STEPS */
+.booking-step{display:none}.booking-step.active{display:block}
+
+/* NOTIFICATION */
+.notif{position:fixed;top:66px;right:16px;background:var(--primary-dark);color:#fff;padding:11px 18px;border-radius:var(--radius);font-size:11px;font-weight:600;transform:translateX(220%);transition:transform 0.3s;z-index:100;letter-spacing:0.04em;border:1px solid rgba(170,59,255,0.4)}
+.notif.show{transform:translateX(0)}
+</style>
+<div class="app">
+<nav>
+  <span class="nav-logo">Nady's Wohlfühloase</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showScreen('booking',this)">Buchung</button>
+    <button class="nav-tab" onclick="showScreen('events',this)">Events</button>
+    <button class="nav-tab" onclick="showScreen('admin',this)">Admin <span class="nav-badge">3</span></button>
+  </div>
+</nav>
+
+<!-- BOOKING -->
+<div id="screen-booking" class="screen active">
+  <div class="booking-hero">
+    <div class="booking-hero-label">Online-Buchung</div>
+    <h1>Ihr Wohlbefinden<br>beginnt hier</h1>
+    <p>Massagen · Reiki · Ernährungsberatung</p>
+  </div>
+  <div class="booking-body">
+    <div class="step-indicator">
+      <div class="step active" id="si-1"><div class="step-dot">1</div><span>Service</span></div>
+      <div class="step-line"></div>
+      <div class="step" id="si-2"><div class="step-dot">2</div><span>Termin</span></div>
+      <div class="step-line"></div>
+      <div class="step" id="si-3"><div class="step-dot">3</div><span>Daten</span></div>
+      <div class="step-line"></div>
+      <div class="step" id="si-4"><div class="step-dot">4</div><span>Bestätigung</span></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="booking-step active" id="bstep-1">
+      <div class="section-label">Service wählen</div>
+      <div class="service-grid">
+        <div class="service-card selected" onclick="selectService(this,'Klassische Massage')">
+          <div class="service-icon">🌿</div>
+          <div class="service-name">Klassische Massage</div>
+          <div class="service-detail">Entspannung & Erholung</div>
+          <div class="service-price">60 min · 75 €</div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'Tiefengewebsmassage')">
+          <div class="service-icon">💆</div>
+          <div class="service-name">Tiefengewebe</div>
+          <div class="service-detail">Intensiv & therapeutisch</div>
+          <div class="service-price">90 min · 105 €</div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'Reiki-Sitzung')">
+          <div class="service-icon">✨</div>
+          <div class="service-name">Reiki-Sitzung</div>
+          <div class="service-detail">Energiearbeit & Balance</div>
+          <div class="service-price">60 min · 65 €</div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'Ernährungsberatung')">
+          <div class="service-icon">🥗</div>
+          <div class="service-name">Ernährungsberatung</div>
+          <div class="service-detail">Individuelle Beratung</div>
+          <div class="service-price">45 min · 55 €</div>
+        </div>
+      </div>
+      <div class="section-label">Standort</div>
+      <div class="location-row">
+        <button class="loc-btn selected" onclick="selectLoc(this)">
+          <div class="loc-btn-name">🏡 Praxis Hannover</div>
+          <div class="loc-btn-sub">Innenstadt · Parkplatz</div>
+        </button>
+        <button class="loc-btn" onclick="selectLoc(this)">
+          <div class="loc-btn-name">🌳 Praxis Peine</div>
+          <div class="loc-btn-sub">Ruhige Lage · Garten</div>
+        </button>
+      </div>
+      <button class="btn-primary" onclick="nextStep(1)">Weiter zu Termin →</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="booking-step" id="bstep-2">
+      <div class="section-label">Datum wählen – Mai 2025</div>
+      <div class="calendar-strip">
+        <div class="cal-day unavail"><div class="cal-day-name">Mo</div><div class="cal-day-num">5</div></div>
+        <div class="cal-day" onclick="selectDay(this)"><div class="cal-day-name">Di</div><div class="cal-day-num">6</div></div>
+        <div class="cal-day selected" onclick="selectDay(this)"><div class="cal-day-name">Mi</div><div class="cal-day-num">7</div></div>
+        <div class="cal-day" onclick="selectDay(this)"><div class="cal-day-name">Do</div><div class="cal-day-num">8</div></div>
+        <div class="cal-day" onclick="selectDay(this)"><div class="cal-day-name">Fr</div><div class="cal-day-num">9</div></div>
+        <div class="cal-day unavail"><div class="cal-day-name">Sa</div><div class="cal-day-num">10</div></div>
+        <div class="cal-day" onclick="selectDay(this)"><div class="cal-day-name">Di</div><div class="cal-day-num">13</div></div>
+        <div class="cal-day" onclick="selectDay(this)"><div class="cal-day-name">Mi</div><div class="cal-day-num">14</div></div>
+      </div>
+      <div class="section-label">Uhrzeit</div>
+      <div class="time-grid">
+        <button class="time-btn busy">09:00</button>
+        <button class="time-btn" onclick="selectTime(this)">10:00</button>
+        <button class="time-btn selected" onclick="selectTime(this)">11:00</button>
+        <button class="time-btn" onclick="selectTime(this)">13:00</button>
+        <button class="time-btn busy">14:00</button>
+        <button class="time-btn" onclick="selectTime(this)">15:00</button>
+        <button class="time-btn" onclick="selectTime(this)">16:00</button>
+        <button class="time-btn busy">17:00</button>
+        <button class="time-btn" onclick="selectTime(this)">18:00</button>
+      </div>
+      <div style="display:flex;gap:9px">
+        <button class="btn-secondary" onclick="prevStep(2)" style="max-width:95px">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(2)">Weiter zu Kontakt →</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="booking-step" id="bstep-3">
+      <div class="section-label">Ihre Kontaktdaten</div>
+      <div class="form-row" style="margin-bottom:12px">
+        <div class="form-group" style="margin:0"><label class="form-label">Vorname</label><input class="form-input" value="Anna" /></div>
+        <div class="form-group" style="margin:0"><label class="form-label">Nachname</label><input class="form-input" value="Müller" /></div>
+      </div>
+      <div class="form-group"><label class="form-label">E-Mail</label><input class="form-input" value="anna.mueller@email.de" /></div>
+      <div class="form-group"><label class="form-label">Telefon</label><input class="form-input" value="+49 511 123456" /></div>
+      <div class="form-group">
+        <label class="form-label">Gutschein-Code (optional)</label>
+        <div class="voucher-input-row">
+          <input class="form-input" id="voucher-code" placeholder="z.B. NADINE20" />
+          <button class="voucher-btn" onclick="applyVoucher()">Einlösen</button>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Anmerkungen</label><textarea class="form-input" rows="2" placeholder="Verletzungen, Wünsche..."></textarea></div>
+      <div style="display:flex;gap:9px">
+        <button class="btn-secondary" onclick="prevStep(3)" style="max-width:95px">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(3)">Buchung absenden →</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="booking-step" id="bstep-4">
+      <div class="success-card">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Anfrage eingegangen</div>
+        <div class="success-sub">Ihre Buchungsanfrage wurde übermittelt.<br>Nadine bestätigt Ihren Termin in Kürze per E-Mail.</div>
+      </div>
+      <div class="booking-summary">
+        <div class="summary-row"><span class="summary-label">Service</span><span class="summary-value">Klassische Massage</span></div>
+        <div class="summary-row"><span class="summary-label">Standort</span><span class="summary-value">Praxis Hannover</span></div>
+        <div class="summary-row"><span class="summary-label">Datum</span><span class="summary-value">Mi, 7. Mai 2025</span></div>
+        <div class="summary-row"><span class="summary-label">Uhrzeit</span><span class="summary-value">11:00 Uhr</span></div>
+        <div class="summary-row"><span class="summary-label">Kundin</span><span class="summary-value">Anna Müller</span></div>
+        <div class="summary-row"><span class="summary-label">Gesamtpreis</span><span class="summary-value" style="color:var(--primary);font-size:15px">75,00 €</span></div>
+      </div>
+      <button class="btn-secondary" style="margin-bottom:9px" onclick="showNotif('Kalender-Einladung (.ics) heruntergeladen')">📅 Zum Kalender hinzufügen</button>
+      <button class="btn-secondary" onclick="resetBooking()">Neue Buchung starten</button>
+    </div>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<div id="screen-events" class="screen">
+  <div class="events-header">
+    <h2>Veranstaltungen & Workshops</h2>
+    <p>Aktuelle Events · Reiki-Abende · Ernährungskurse</p>
+  </div>
+  <div class="events-body">
+    <div class="event-card">
+      <div class="event-banner purple">
+        <div class="event-date-badge"><div class="event-date-day">15</div><div class="event-date-mon">Mai</div></div>
+        <div class="event-title-area"><h3>Reiki-Einführungsabend</h3><p>Hannover · 18:30 – 20:30 Uhr</p></div>
+      </div>
+      <div class="event-body">
+        <div class="event-meta">
+          <span class="event-meta-item">👥 Max. 8 Personen</span>
+          <span class="event-meta-item">💶 25 €</span>
+          <span class="event-meta-item" style="color:oklch(0.4 0.15 145)">🟢 5 Plätze frei</span>
+        </div>
+        <div class="event-desc">Lernen Sie die Grundprinzipien der Reiki-Energie kennen. Dieser Abend ist ideal für Einsteiger und alle, die sich für ganzheitliches Wohlbefinden interessieren.</div>
+        <button class="event-register-btn" onclick="registerEvent('Reiki-Einführungsabend')">Jetzt anmelden</button>
+      </div>
+    </div>
+    <div class="event-card">
+      <div class="event-banner violet">
+        <div class="event-date-badge"><div class="event-date-day">22</div><div class="event-date-mon">Mai</div></div>
+        <div class="event-title-area"><h3>Entspannungs-Workshop</h3><p>Peine · 10:00 – 13:00 Uhr</p></div>
+      </div>
+      <div class="event-body">
+        <div class="event-meta">
+          <span class="event-meta-item">👥 Max. 12 Personen</span>
+          <span class="event-meta-item">💶 45 €</span>
+          <span class="event-meta-item" style="color:oklch(0.55 0.15 60)">🟡 2 Plätze frei</span>
+        </div>
+        <div class="event-desc">Praktische Übungen zur Stressreduktion und tiefen Entspannung. Mit Atemtechniken, sanfter Bewegung und geführter Meditation.</div>
+        <button class="event-register-btn" onclick="registerEvent('Entspannungs-Workshop')">Jetzt anmelden</button>
+      </div>
+    </div>
+    <div class="event-card">
+      <div class="event-banner lavender">
+        <div class="event-date-badge"><div class="event-date-day">5</div><div class="event-date-mon">Jun</div></div>
+        <div class="event-title-area"><h3>Ernährungsworkshop</h3><p>Online · 19:00 – 20:30 Uhr</p></div>
+      </div>
+      <div class="event-body">
+        <div class="event-meta">
+          <span class="event-meta-item">👥 Unbegrenzt</span>
+          <span class="event-meta-item">💶 35 €</span>
+          <span class="event-meta-item" style="color:oklch(0.4 0.15 145)">🟢 Plätze verfügbar</span>
+        </div>
+        <div class="event-desc">Darmgesundheit und Immunsystem stärken: Nadine zeigt, welche Lebensmittel wirklich helfen und wie Sie Ihre Ernährung einfach umstellen können.</div>
+        <button class="event-register-btn" onclick="registerEvent('Ernährungsworkshop')">Jetzt anmelden</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="screen-admin" class="screen">
+  <div class="admin-layout">
+    <div class="admin-sidebar">
+      <div class="admin-nav-item active" onclick="showAdminView('dashboard',this)"><span class="admin-nav-icon">📊</span>Dashboard</div>
+      <div class="admin-nav-item" onclick="showAdminView('bookings',this)"><span class="admin-nav-icon">📋</span>Buchungen <span class="nav-badge" style="margin-left:auto" id="pending-badge">3</span></div>
+      <div class="admin-nav-item" onclick="showAdminView('services',this)"><span class="admin-nav-icon">🌿</span>Angebote</div>
+      <div class="admin-nav-item" onclick="showAdminView('vouchers',this)"><span class="admin-nav-icon">🎁</span>Gutscheine</div>
+      <div class="admin-nav-item" onclick="showAdminView('calendar',this)"><span class="admin-nav-icon">📅</span>Kalender</div>
+      <div class="admin-nav-item" onclick="showAdminView('blocker',this)"><span class="admin-nav-icon">🚫</span>Verfügbarkeit</div>
+    </div>
+    <div class="admin-main">
+      <!-- DASHBOARD -->
+      <div id="av-dashboard">
+        <div class="admin-topbar"><div class="admin-title">Übersicht</div><div class="admin-date">Freitag, 24. April 2026</div></div>
+        <div class="stats-grid">
+          <div class="stat-card p1"><div class="stat-label">Neue Anfragen</div><div class="stat-value" id="stat-pending">3</div><div class="stat-sub">Warten auf Bestätigung</div></div>
+          <div class="stat-card p2"><div class="stat-label">Heute</div><div class="stat-value">4</div><div class="stat-sub">Termine bestätigt</div></div>
+          <div class="stat-card p3"><div class="stat-label">Monat</div><div class="stat-value">47</div><div class="stat-sub">Buchungen gesamt</div></div>
+          <div class="stat-card p4"><div class="stat-label">Umsatz</div><div class="stat-value">3.280 €</div><div class="stat-sub">April 2026</div></div>
+        </div>
+        <div class="admin-panels">
+          <div class="admin-panel">
+            <div class="admin-panel-header"><span class="admin-panel-title">Offene Anfragen</span><span class="admin-panel-action">Alle ansehen</span></div>
+            <div class="booking-row" id="br-1">
+              <div class="booking-avatar">LK</div>
+              <div class="booking-info"><div class="booking-name">Laura Klein</div><div class="booking-meta">Klassische Massage · 7. Mai · 11:00 · Hannover</div></div>
+              <div class="booking-action-btns">
+                <button class="mini-btn confirm" onclick="confirmBooking('br-1','LK')">✓ Ok</button>
+                <button class="mini-btn cancel" onclick="cancelBooking('br-1')">✕</button>
+              </div>
+            </div>
+            <div class="booking-row" id="br-2">
+              <div class="booking-avatar">TM</div>
+              <div class="booking-info"><div class="booking-name">Thomas Meier</div><div class="booking-meta">Reiki-Sitzung · 8. Mai · 14:00 · Peine</div></div>
+              <div class="booking-action-btns">
+                <button class="mini-btn confirm" onclick="confirmBooking('br-2','TM')">✓ Ok</button>
+                <button class="mini-btn cancel" onclick="cancelBooking('br-2')">✕</button>
+              </div>
+            </div>
+            <div class="booking-row" id="br-3">
+              <div class="booking-avatar">SR</div>
+              <div class="booking-info"><div class="booking-name">Sandra Richter</div><div class="booking-meta">Tiefengewebe · 9. Mai · 10:00 · Hannover</div></div>
+              <div class="booking-action-btns">
+                <button class="mini-btn confirm" onclick="confirmBooking('br-3','SR')">✓ Ok</button>
+                <button class="mini-btn cancel" onclick="cancelBooking('br-3')">✕</button>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div class="admin-panel">
+              <div class="admin-panel-header"><span class="admin-panel-title">Kalender Mai</span></div>
+              <div class="calendar-mini">
+                <div class="cal-mini-header"><span class="cal-mini-month">Mai 2025</span><div><button class="cal-mini-nav">‹</button><button class="cal-mini-nav">›</button></div></div>
+                <div class="cal-mini-grid">
+                  <div class="cal-mini-day-name">Mo</div><div class="cal-mini-day-name">Di</div><div class="cal-mini-day-name">Mi</div><div class="cal-mini-day-name">Do</div><div class="cal-mini-day-name">Fr</div><div class="cal-mini-day-name">Sa</div><div class="cal-mini-day-name">So</div>
+                  <div class="cal-mini-cell empty"></div><div class="cal-mini-cell empty"></div><div class="cal-mini-cell">1</div><div class="cal-mini-cell">2</div><div class="cal-mini-cell">3</div><div class="cal-mini-cell">4</div><div class="cal-mini-cell">5</div>
+                  <div class="cal-mini-cell">6</div><div class="cal-mini-cell has-booking">7</div><div class="cal-mini-cell has-booking">8</div><div class="cal-mini-cell has-booking">9</div><div class="cal-mini-cell">10</div><div class="cal-mini-cell">11</div><div class="cal-mini-cell">12</div>
+                  <div class="cal-mini-cell has-booking">13</div><div class="cal-mini-cell">14</div><div class="cal-mini-cell has-booking">15</div><div class="cal-mini-cell">16</div><div class="cal-mini-cell">17</div><div class="cal-mini-cell">18</div><div class="cal-mini-cell">19</div>
+                  <div class="cal-mini-cell today">20</div><div class="cal-mini-cell">21</div><div class="cal-mini-cell has-booking">22</div><div class="cal-mini-cell">23</div><div class="cal-mini-cell">24</div><div class="cal-mini-cell">25</div><div class="cal-mini-cell">26</div>
+                </div>
+              </div>
+            </div>
+            <div class="admin-panel">
+              <div class="admin-panel-header"><span class="admin-panel-title">Schnellaktionen</span></div>
+              <div class="quick-actions">
+                <div class="quick-action" onclick="showNotif('Blocker wurde hinzugefügt ✓')"><div class="quick-action-icon">🚫</div><div><div class="quick-action-text">Blocker hinzufügen</div><div class="quick-action-sub">Urlaub & Pausen blockieren</div></div></div>
+                <div class="quick-action" onclick="showNotif('Gutschein SOMMER25 erstellt ✓')"><div class="quick-action-icon">🎁</div><div><div class="quick-action-text">Gutschein erstellen</div><div class="quick-action-sub">Code generieren & versenden</div></div></div>
+                <div class="quick-action" onclick="showNotif('Apple-Kalender synchronisiert ✓')"><div class="quick-action-icon">📅</div><div><div class="quick-action-text">Kalender sync</div><div class="quick-action-sub">Busy/Free abgleichen</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOKINGS -->
+      <div id="av-bookings" style="display:none">
+        <div class="admin-topbar"><div class="admin-title">Alle Buchungen</div></div>
+        <div class="admin-panel">
+          <div class="admin-panel-header"><span class="admin-panel-title">Buchungsliste</span><span class="admin-panel-action">CSV Export</span></div>
+          <div class="booking-row"><div class="booking-avatar">AM</div><div class="booking-info"><div class="booking-name">Anna Müller</div><div class="booking-meta">Klassische Massage · 7. Mai · 11:00 · Hannover</div></div><span class="booking-status status-requested">Anfrage</span></div>
+          <div class="booking-row"><div class="booking-avatar" style="background:var(--accent-bg);color:var(--primary-dark)">JB</div><div class="booking-info"><div class="booking-name">Jana Bauer</div><div class="booking-meta">Reiki-Sitzung · 6. Mai · 15:00 · Peine</div></div><span class="booking-status status-confirmed">Bestätigt</span></div>
+          <div class="booking-row"><div class="booking-avatar" style="background:#fce8f0;color:#8b1a4a">KW</div><div class="booking-info"><div class="booking-name">Klaus Werner</div><div class="booking-meta">Tiefengewebe · 5. Mai · 10:00 · Hannover</div></div><span class="booking-status status-cancelled">Storniert</span></div>
+          <div class="booking-row"><div class="booking-avatar" style="background:var(--accent-bg);color:var(--primary-dark)">MS</div><div class="booking-info"><div class="booking-name">Maria Schulz</div><div class="booking-meta">Ernährungsberatung · 13. Mai · 09:00 · Hannover</div></div><span class="booking-status status-confirmed">Bestätigt</span></div>
+        </div>
+      </div>
+
+      <!-- SERVICES -->
+      <div id="av-services" style="display:none">
+        <div class="admin-topbar"><div class="admin-title">Angebote & Preise</div><button class="btn-primary" style="width:auto;padding:9px 18px;font-size:11px" onclick="showNotif('Neues Angebot hinzugefügt ✓')">+ Angebot</button></div>
+        <div class="admin-panel">
+          <div class="services-list">
+            <div class="service-row"><div><div class="service-row-name">Klassische Massage</div><div class="service-row-meta">60 min · Hannover & Peine</div></div><span class="service-row-price">75 €</span><button class="toggle-switch" onclick="toggleService(this)"></button></div>
+            <div class="service-row"><div><div class="service-row-name">Tiefengewebsmassage</div><div class="service-row-meta">90 min · Hannover & Peine</div></div><span class="service-row-price">105 €</span><button class="toggle-switch" onclick="toggleService(this)"></button></div>
+            <div class="service-row"><div><div class="service-row-name">Reiki-Sitzung</div><div class="service-row-meta">60 min · Beide Standorte</div></div><span class="service-row-price">65 €</span><button class="toggle-switch" onclick="toggleService(this)"></button></div>
+            <div class="service-row"><div><div class="service-row-name">Ernährungsberatung</div><div class="service-row-meta">45 min · Hannover</div></div><span class="service-row-price">55 €</span><button class="toggle-switch off" onclick="toggleService(this)"></button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VOUCHERS -->
+      <div id="av-vouchers" style="display:none">
+        <div class="admin-topbar"><div class="admin-title">Gutscheine</div><button class="btn-primary" style="width:auto;padding:9px 18px;font-size:11px" onclick="showNotif('Gutschein WOHL2025 erstellt ✓')">+ Gutschein</button></div>
+        <div class="admin-panel">
+          <div class="voucher-row"><div><span class="voucher-code">NADINE20</span><div class="voucher-info">20% Rabatt · Gültig bis 31.12.2025</div></div><span class="voucher-status-active">Aktiv</span></div>
+          <div class="voucher-row"><div><span class="voucher-code">SOMMER25</span><div class="voucher-info">25 € Rabatt · 3 von 10 eingelöst</div></div><span class="voucher-status-active">Aktiv</span></div>
+          <div class="voucher-row"><div><span class="voucher-code">XMAS2024</span><div class="voucher-info">15% Rabatt · Abgelaufen</div></div><span style="font-size:10px;color:var(--muted-fg);padding:2px 8px">Abgelaufen</span></div>
+        </div>
+      </div>
+
+      <!-- CALENDAR -->
+      <div id="av-calendar" style="display:none">
+        <div class="admin-topbar"><div class="admin-title">Kalender & Sync</div></div>
+        <div class="admin-panel">
+          <div class="admin-panel-header"><span class="admin-panel-title">Apple Kalender Verbindung</span><button class="mini-btn confirm" onclick="showNotif('Apple-Kalender synchronisiert ✓')">Jetzt sync</button></div>
+          <div style="padding:18px">
+            <div style="background:var(--accent-bg);border:1.5px solid var(--accent-border);border-radius:var(--radius);padding:14px;font-size:11px;color:var(--primary-dark);line-height:1.8">
+              <strong style="font-weight:600;display:block;margin-bottom:5px">Verbunden: Nadines Kalender</strong>
+              Busy/Free-Zeiten werden automatisch importiert.<br>Bestätigte Buchungen erscheinen als Termine im Apple-Kalender.<br>Pufferzeiten: 15 min vor & nach jedem Termin.
+            </div>
+            <div class="section-label" style="margin:16px 0 8px">Pufferzeit</div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <input type="range" min="0" max="60" value="15" step="5" oninput="document.getElementById('buf-val').textContent=this.value+' min'" style="flex:1;accent-color:var(--primary)">
+              <span style="font-size:12px;font-weight:600;color:var(--primary-dark);min-width:52px" id="buf-val">15 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCKER -->
+      <div id="av-blocker" style="display:none">
+        <div class="admin-topbar"><div class="admin-title">Blocker & Pausen</div><button class="btn-primary" style="width:auto;padding:9px 18px;font-size:11px" onclick="showNotif('Blocker gespeichert ✓')">+ Blocker</button></div>
+        <div class="admin-panel">
+          <div class="admin-panel-header"><span class="admin-panel-title">Aktive Blocker</span></div>
+          <div class="booking-row"><div class="booking-avatar" style="background:#fce8f0;color:#8b1a4a;font-size:14px">🚫</div><div class="booking-info"><div class="booking-name">Mittagspause täglich</div><div class="booking-meta">12:00 – 13:00 · Alle Tage</div></div><span class="booking-status status-confirmed">Aktiv</span></div>
+          <div class="booking-row"><div class="booking-avatar" style="background:oklch(0.96 0.06 295);color:oklch(0.35 0.15 295);font-size:14px">✈️</div><div class="booking-info"><div class="booking-name">Urlaub</div><div class="booking-meta">24. Juli – 2. August 2025</div></div><span class="booking-status status-requested">Geplant</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script>
+function showScreen(name,tab){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  tab.classList.add('active');
+}
+function nextStep(c){
+  document.getElementById('bstep-'+c).classList.remove('active');
+  document.getElementById('bstep-'+(c+1)).classList.add('active');
+  var si=document.getElementById('si-'+c);
+  si.classList.remove('active');si.classList.add('done');si.querySelector('.step-dot').textContent='✓';
+  var nx=document.getElementById('si-'+(c+1));if(nx)nx.classList.add('active');
+}
+function prevStep(c){
+  document.getElementById('bstep-'+c).classList.remove('active');
+  document.getElementById('bstep-'+(c-1)).classList.add('active');
+  var si=document.getElementById('si-'+(c-1));
+  si.classList.remove('done');si.classList.add('active');si.querySelector('.step-dot').textContent=(c-1);
+  var cur=document.getElementById('si-'+c);if(cur)cur.classList.remove('active');
+}
+function selectService(el){document.querySelectorAll('.service-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected')}
+function selectLoc(el){document.querySelectorAll('.loc-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected')}
+function selectDay(el){document.querySelectorAll('.cal-day').forEach(d=>d.classList.remove('selected'));el.classList.add('selected')}
+function selectTime(el){document.querySelectorAll('.time-btn').forEach(t=>t.classList.remove('selected'));el.classList.add('selected')}
+function applyVoucher(){
+  var c=document.getElementById('voucher-code').value.trim().toUpperCase();
+  showNotif(c==='NADINE20'||c==='SOMMER25'?'Gutschein '+c+' eingelöst ✓':'Ungültiger Gutschein-Code');
+}
+function resetBooking(){
+  for(var i=1;i<=4;i++){var s=document.getElementById('bstep-'+i);s.classList.remove('active');var si=document.getElementById('si-'+i);if(si){si.classList.remove('active','done');si.querySelector('.step-dot').textContent=i;}}
+  document.getElementById('bstep-1').classList.add('active');
+  document.getElementById('si-1').classList.add('active');
+}
+function registerEvent(n){showNotif('Anmeldung für "'+n+'" eingegangen!')}
+var pendingCount=3;
+function confirmBooking(id,name){
+  var row=document.getElementById(id);if(!row)return;
+  row.querySelector('.booking-action-btns').innerHTML='<span class="booking-status status-confirmed">Bestätigt</span>';
+  pendingCount=Math.max(0,pendingCount-1);
+  document.getElementById('stat-pending').textContent=pendingCount;
+  document.getElementById('pending-badge').textContent=pendingCount;
+  showNotif('Buchung bestätigt · E-Mail an Kund:in gesendet ✓');
+}
+function cancelBooking(id){
+  var row=document.getElementById(id);if(!row)return;
+  row.querySelector('.booking-action-btns').innerHTML='<span class="booking-status status-cancelled">Abgesagt</span>';
+  pendingCount=Math.max(0,pendingCount-1);
+  document.getElementById('stat-pending').textContent=pendingCount;
+  document.getElementById('pending-badge').textContent=pendingCount;
+  showNotif('Buchung abgesagt · Stornierungsmail gesendet');
+}
+function toggleService(btn){btn.classList.toggle('off')}
+function showAdminView(name,el){
+  document.querySelectorAll('[id^="av-"]').forEach(v=>v.style.display='none');
+  document.getElementById('av-'+name).style.display='block';
+  document.querySelectorAll('.admin-nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+}
+var nt;
+function showNotif(msg){
+  var n=document.getElementById('notif');n.textContent=msg;n.classList.add('show');
+  clearTimeout(nt);nt=setTimeout(()=>n.classList.remove('show'),2800);
+}
+</script>

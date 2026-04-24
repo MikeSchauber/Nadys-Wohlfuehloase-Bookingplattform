@@ -5,7 +5,7 @@
             <h2>by Nady's Wohlfühloase</h2>
         </div>
         <div>
-            <Button @click="router.push('/service')" variant="outline">Buchung Starten</Button>
+            <Button @click="router.push('/bookings')" variant="outline">Buchung Starten</Button>
         </div>
     </main>
 </template>

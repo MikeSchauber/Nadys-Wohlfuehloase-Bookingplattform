@@ -1,31 +1,22 @@
 <template>
-    <div class="main">
-        <div class="header">
-            <a v-if="route.path === '/'" href="https://www.nady-artist-of-live.de/">
-                <Button>
-                    <MoveLeft />
-                    Zurück zur Webseite
-                </Button>
-            </a>
+    <div class="page">
+        <div class="main">
+            <div class="header-section">
+                <HeaderSection></HeaderSection>
+            </div>
+            <router-view></router-view>
         </div>
-        <router-view></router-view>
         <FooterSection></FooterSection>
-
-
     </div>
 </template>
 
 <script setup lang="ts">
-
-import StartGreet from '@/components/custom/StartGreet.vue';
-import ServiceChoose from '@/components/custom/ServiceChoose.vue';
 import FooterSection from '@/components/shared/FooterSection.vue';
-import Button from '@/components/ui/button/Button.vue';
-import { MoveLeft } from 'lucide-vue-next';
 import { useNavigationStore } from '@/stores/navigationStore';
 import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useBookingStore } from '@/stores/bookingStore';
+import HeaderSection from '@/components/shared/HeaderSection.vue';
 
 const bookingStore = useBookingStore()
 const uiStore = useNavigationStore()
@@ -43,6 +34,15 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.page {
+    padding: 12px 18px;
+    background-color: var(white);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
 .main {
     height: 100vh;
     display: flex;
@@ -50,11 +50,12 @@ onMounted(() => {
     justify-content: space-between;
     flex-direction: column;
     padding: 20px 40px;
+    background-color: var(--primary);
+    border-radius: 8px;
+    box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.572);
 }
 
-.header {
-    display: flex;
-    justify-content: flex-start;
+.header-section {
     width: 100%;
 }
 </style>

@@ -25,13 +25,13 @@
   --input: oklch(0.88 0.04 295);
   --ring: oklch(0.55 0.18 295);
 
-  --muted: oklch(0.96 0.01 295);
+  --muted: oklch(88.224% 0.0001 271.152);
   --muted-foreground: oklch(0.45 0.04 295);
 
 
 
 
-  --text: #620674;
+  --text: #fbfbfb;
   --text-foreground: #ffffff;
   --text-h: #08060d;
   --bg: #fff;
