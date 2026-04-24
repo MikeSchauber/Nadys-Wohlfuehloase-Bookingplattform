@@ -19,7 +19,7 @@
             </div>
 
             <div v-if="route.path === '/events'" class="events-header">
-                <h2>Veranstaltungen & Workshops</h2>
+                <h1>Veranstaltungen & Workshops</h1>
                 <p>Aktuelle Events · Reiki-Abende · Ernährungskurse</p>
             </div>
         </div>
@@ -36,12 +36,15 @@ const router = useRouter()
 </script>
 
 <style scoped>
+header {
+    background-color: transparent;
+}
+
 .main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: var(--primary);
     padding: var(--inner-padding);
     position: relative;
 }
@@ -64,7 +67,6 @@ const router = useRouter()
     padding: var(--inner-padding);
     padding-top: 36px;
     padding-bottom: 28px;
-
 }
 
 .booking-hero {
@@ -74,8 +76,20 @@ const router = useRouter()
 
     >h1 {
         margin: 0;
-        font-weight: 300;
+
     }
+}
+
+.events-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    >h1 {
+        margin: 0;
+    }
+
+
 }
 
 .brand-sign h2 {

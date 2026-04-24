@@ -1,10 +1,12 @@
 <template>
     <div class="page">
-        <div class="main">
+        <div class="app">
             <div class="header-section">
                 <HeaderSection></HeaderSection>
             </div>
-            <router-view></router-view>
+            <div class="inner-router">
+                <router-view></router-view>
+            </div>
         </div>
         <FooterSection></FooterSection>
     </div>
@@ -36,24 +38,33 @@ onMounted(() => {
 <style scoped>
 .page {
     padding: 12px 18px;
-    background-color: var(white);
+    background-color: white;
     color: white;
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
 
-.main {
+.app {
     height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: var(--primary);
-    border-radius: 8px;
-    box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.572);
+    background-color: white;
+    border-radius: var(--main-border-radius);
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.572);
 }
 
 .header-section {
+    background-color: var(--primary);
+    border-top-left-radius: var(--main-border-radius);
+    border-top-right-radius: var(--main-border-radius);
+    width: 100%;
+}
+
+.inner-router {
+    padding: var(--inner-padding);
+    padding-top: 22px;
     width: 100%;
 }
 </style>

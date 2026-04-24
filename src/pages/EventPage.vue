@@ -1,27 +1,23 @@
 <template>
-    <div class="main">
+    <div class="events-container">
 
-        <StepperRegistration></StepperRegistration>
-        <main>
-            <h1>Event Registration</h1>
-        </main>
-        <div></div>
+        <h1>Event Registration</h1>
+        <br><br><br>
+        <div>Event loop</div>
     </div>
 </template>
 
 <script setup lang="ts">
-import StepperRegistration from '@/components/custom/StepperRegistration.vue';
 
 
 </script>
 
 <style scoped>
-.main {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 20px 40px;
+.events-container {
+    color: var(--primary);
+    h1 {
+        color: var(--primary);
+        margin: 0;
+    }
 }
 </style>
