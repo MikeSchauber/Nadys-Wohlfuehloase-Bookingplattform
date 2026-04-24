@@ -1,5 +1,5 @@
 <template>
-    <footer class="brand">
+    <footer class="footer">
         <a href="https://www.nady-artist-of-live.de/">
             <Button>
                 <House />
@@ -20,13 +20,14 @@ import Button from '../ui/button/Button.vue';
 </script>
 
 <style scoped>
-.brand {
+.footer {
     font-weight: 500;
     color: var(--primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 8px 24px;
 }
 
 .social-links {

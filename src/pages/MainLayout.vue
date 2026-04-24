@@ -28,7 +28,7 @@ onMounted(() => {
     console.log(bookingStore.service);
 
     if (bookingStore.service === "") {
-        router.push("/")
+        router.push("/bookings")
     }
 })
 </script>
@@ -47,9 +47,7 @@ onMounted(() => {
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-direction: column;
-    padding: 20px 40px;
     background-color: var(--primary);
     border-radius: 8px;
     box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.572);

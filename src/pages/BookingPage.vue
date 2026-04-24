@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div>
         <StepperBookings></StepperBookings>
 
         <main>
@@ -26,12 +26,5 @@ const bookingStore = useBookingStore()
 </script>
 
 <style scoped>
-.main {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    padding: 20px 40px;
-}
+
 </style>
