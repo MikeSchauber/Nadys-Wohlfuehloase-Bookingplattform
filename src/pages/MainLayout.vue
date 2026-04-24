@@ -1,31 +1,24 @@
 <template>
-    <div class="main">
-        <div class="header">
-            <a v-if="route.path === '/'" href="https://www.nady-artist-of-live.de/">
-                <Button>
-                    <MoveLeft />
-                    Zurück zur Webseite
-                </Button>
-            </a>
+    <div class="page">
+        <div class="app">
+            <div class="header-section">
+                <HeaderSection></HeaderSection>
+            </div>
+            <div class="inner-router">
+                <router-view></router-view>
+            </div>
         </div>
-        <router-view></router-view>
         <FooterSection></FooterSection>
-
-
     </div>
 </template>
 
 <script setup lang="ts">
-
-import StartGreet from '@/components/custom/StartGreet.vue';
-import ServiceChoose from '@/components/custom/ServiceChoose.vue';
 import FooterSection from '@/components/shared/FooterSection.vue';
-import Button from '@/components/ui/button/Button.vue';
-import { MoveLeft } from 'lucide-vue-next';
 import { useNavigationStore } from '@/stores/navigationStore';
 import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useBookingStore } from '@/stores/bookingStore';
+import HeaderSection from '@/components/shared/HeaderSection.vue';
 
 const bookingStore = useBookingStore()
 const uiStore = useNavigationStore()
@@ -37,24 +30,41 @@ onMounted(() => {
     console.log(bookingStore.service);
 
     if (bookingStore.service === "") {
-        router.push("/")
+        router.push("/bookings")
     }
 })
 </script>
 
 <style scoped>
-.main {
+.page {
+    padding: 12px 18px;
+    background-color: white;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.app {
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-direction: column;
-    padding: 20px 40px;
+    background-color: white;
+    border-radius: var(--main-border-radius);
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.572);
 }
 
-.header {
-    display: flex;
-    justify-content: flex-start;
+.header-section {
+    background-color: var(--primary);
+    border-top-left-radius: var(--main-border-radius);
+    border-top-right-radius: var(--main-border-radius);
+    width: 100%;
+}
+
+.inner-router {
+    padding: var(--inner-padding);
+    padding-top: 22px;
     width: 100%;
 }
 </style>
