@@ -1,15 +1,8 @@
 <template>
-    <div>
+    <div class="booking-page">
         <StepperBookings></StepperBookings>
 
-        <main>
-            <div v-if="bookingStore.service === 'massage'">
-                <h1>Massage Bookings</h1>
-            </div>
-            <div v-if="bookingStore.service === 'reiki'">
-                <h1>Reiki Bookings</h1>
-            </div>
-        </main>
+        <h1>Booking loop</h1>
 
         <div></div>
     </div>
@@ -26,5 +19,9 @@ const bookingStore = useBookingStore()
 </script>
 
 <style scoped>
-
+.booking-page {
+    h1 {
+        color: var(--primary);
+    }
+}
 </style>
