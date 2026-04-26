@@ -26,8 +26,14 @@
             <div class="locations">
                 <Card v-for="location in locations" class="location-card">
                     <CardContent class="location-content">
-                        <span>{{ location.name }}</span>
-                        <span>{{ location.address }}</span>
+                        <div class="location-text-content">
+                            <span>{{ location.emoji }}</span>
+                            <h4>{{ location.name }}</h4>
+                            <div class="location-text-description">
+                                <span>{{ location.address }}</span>
+                            </div>
+                        </div>
+
                     </CardContent>
                 </Card>
             </div>
@@ -88,17 +94,19 @@ onMounted(async () => {
     color: var(--primary);
 
     &:hover {
-        background-color: var(--primary-hover);
-        color: white;
+
+        background-color: color-mix(in srgb, var(--primary-hover) 20%, transparent);
+        border-color: var(--primary-hover);
         transform: scale(1.01);
         box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.349);
     }
 }
 
-.service-content {
+.service-content,
+.location-content {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     gap: 20px;
     padding: 0;
 
@@ -109,33 +117,39 @@ onMounted(async () => {
         border-bottom-left-radius: 20px;
     }
 
-    .service-text-content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 8px;
-        height: 100%;
-
-
-
-        >h4 {
-            font-weight: bold;
-            text-align: start;
-            font-size: 16px;
-        }
-
-        .service-text-description>span {
-            font-size: 14px
-        }
-    }
 }
 
 .location-content {
+    padding: 12px 24px;
+}
+
+.service-text-content,
+.location-text-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    height: 100%;
+
+
+
+    >h4 {
+        font-weight: bold;
+        text-align: start;
+        font-size: 16px;
+    }
+
+    .service-text-description>span {
+        font-size: 14px
+    }
+
+    .location-text-description>span {
+        font-size: 14px;
+    }
 }
+
+
 
 .services,
 .locations {
