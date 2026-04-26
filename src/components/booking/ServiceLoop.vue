@@ -4,11 +4,8 @@
             <span>Service Wählen</span>
             <div class="services">
                 <Card v-for="service in services" class="service-card">
-                    <CardHeader>
-
-                    </CardHeader>
-                    <CardContent>
-                        <div>
+                    <CardContent class="service-content">
+                        <div class="service-img-content">
                             <img :src="service.image_path" :alt="service.image_alt">
                         </div>
                         <div>
@@ -18,22 +15,17 @@
                             </span>
                         </div>
                     </CardContent>
-                    <CardFooter></CardFooter>
                 </Card>
             </div>
         </div>
         <div class="location-container">
             <span>Standort Wählen</span>
             <div class="locations">
-                <Card v-for="location in locations" class="service-card">
-                    <CardHeader>
-
-                    </CardHeader>
-                    <CardContent>
+                <Card v-for="location in locations" class="location-card">
+                    <CardContent class="location-content">
                         <span>{{ location.name }}</span>
-                        <span>{{ location.adress }}</span>
+                        <span>{{ location.address }}</span>
                     </CardContent>
-                    <CardFooter></CardFooter>
                 </Card>
             </div>
         </div>
@@ -77,10 +69,37 @@ onMounted(async () => {
     align-items: flex-start;
     width: 100%;
     gap: 20px;
+    padding: 0 !important;
 
     >h2 {
         color: var(--primary);
     }
+}
+
+.service-card,
+.location-card {
+    padding: 0;
+    border-radius: 21px;
+}
+
+.service-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 0;
+
+    .service-img-content>img {
+        height: 100px;
+        width: auto;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+}
+
+.location-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .services,
@@ -90,6 +109,4 @@ onMounted(async () => {
     gap: 16px;
     width: 100%;
 }
-
-.service-card {}
 </style>

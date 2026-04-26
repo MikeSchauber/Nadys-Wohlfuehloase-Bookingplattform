@@ -15,7 +15,7 @@ export interface Service {
 export interface Location {
   id: string;
   name: string;
-  adress: string;
+  address: string;
   is_active: string;
   created_at: string;
 }
