@@ -4,8 +4,8 @@
             <span>Service Wählen</span>
             <div class="services">
                 <Card v-for="service in services" class="service-card"
-                    :class="{ active: bookingStore.service === service.name }"
-                    @click="bookingStore.setService(service.name)">
+                    :class="{ active: bookingStore.service === service.id }"
+                    @click="bookingStore.setService(service.id)">
                     <CardContent class="service-content">
                         <div class="service-img-content">
                             <img :src="service.image_path" :alt="service.image_alt">
@@ -27,8 +27,8 @@
             <span>Standort Wählen</span>
             <div class="locations">
                 <Card v-for="location in locations" class="location-card"
-                    :class="{ active: bookingStore.location === location.name }"
-                    @click="bookingStore.setLocation(location.name)">
+                    :class="{ active: bookingStore.location === location.id }"
+                    @click="bookingStore.setLocation(location.id)">
                     <CardContent class=" location-content">
                         <div class="location-text-content">
                             <span>{{ location.emoji }}</span>
@@ -62,7 +62,7 @@ onMounted(async () => {
     services.value = await getTableData("services", "service_type", true)
     locations.value = await getTableData("locations", "id", true)
 
-    bookingStore.setLocation(locations.value[2].name)
+    bookingStore.setLocation(locations.value[0].id)
 
 })
 </script>
