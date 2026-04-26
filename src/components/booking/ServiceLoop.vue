@@ -8,11 +8,14 @@
                         <div class="service-img-content">
                             <img :src="service.image_path" :alt="service.image_alt">
                         </div>
-                        <div>
-                            <span>{{ service.description }}</span>
-                            <span v-for="(minutes, key, index) in service.duration" :key="key">
-                                {{ minutes }} Min <span v-if="index === 0"> - </span>
-                            </span>
+                        <div class="service-text-content">
+                            <h4>{{ service.name }}</h4>
+                            <div class="service-text-description">
+                                <span>{{ service.description }}</span>
+                                <span v-for="(minutes, key, index) in service.duration" :key="key">
+                                    {{ minutes }} Min <span v-if="index === 0"> - </span>
+                                </span>
+                            </div>
                         </div>
                     </CardContent>
                 </Card>
@@ -80,12 +83,23 @@ onMounted(async () => {
 .location-card {
     padding: 0;
     border-radius: 21px;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    color: var(--primary);
+
+    &:hover {
+        background-color: var(--primary-hover);
+        color: white;
+        transform: scale(1.01);
+        box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.349);
+    }
 }
 
 .service-content {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    gap: 20px;
     padding: 0;
 
     .service-img-content>img {
@@ -93,6 +107,27 @@ onMounted(async () => {
         width: auto;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
+    }
+
+    .service-text-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 8px;
+        height: 100%;
+
+
+
+        >h4 {
+            font-weight: bold;
+            text-align: start;
+            font-size: 16px;
+        }
+
+        .service-text-description>span {
+            font-size: 14px
+        }
     }
 }
 
