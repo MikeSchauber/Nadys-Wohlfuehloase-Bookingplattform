@@ -2,13 +2,14 @@ export interface Service {
   id: string;
   location_id: string;
   name: string;
-  duration_minutes: number;
+  duration: Record<string, number>;
   price_cents: number;
   is_active: boolean;
   created_at: string;
   service_type: string;
   description: string;
   image_path: string;
+  image_alt: string;
 }
 
 export interface Location {

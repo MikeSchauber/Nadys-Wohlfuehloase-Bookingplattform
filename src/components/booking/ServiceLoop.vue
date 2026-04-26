@@ -9,7 +9,13 @@
                     </CardHeader>
                     <CardContent>
                         <div>
-                            <img :src="service.image_path" alt="">
+                            <img :src="service.image_path" :alt="service.image_alt">
+                        </div>
+                        <div>
+                            <span>{{ service.description }}</span>
+                            <span v-for="(minutes, key, index) in service.duration" :key="key">
+                                {{ minutes }} Min <span v-if="index === 0"> - </span>
+                            </span>
                         </div>
                     </CardContent>
                     <CardFooter></CardFooter>
@@ -21,10 +27,11 @@
             <div class="locations">
                 <Card v-for="location in locations" class="service-card">
                     <CardHeader>
-                        <span>{{ location.name }}</span>
+
                     </CardHeader>
                     <CardContent>
-
+                        <span>{{ location.name }}</span>
+                        <span>{{ location.adress }}</span>
                     </CardContent>
                     <CardFooter></CardFooter>
                 </Card>
