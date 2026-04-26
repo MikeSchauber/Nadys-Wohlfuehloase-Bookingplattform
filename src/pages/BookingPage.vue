@@ -2,13 +2,14 @@
     <div class="booking-page">
         <StepperBookings></StepperBookings>
 
-        <h1>Booking loop</h1>
+        <ServiceLoop></ServiceLoop>
 
         <div></div>
     </div>
 </template>
 
 <script setup lang="ts">
+import ServiceLoop from '@/components/booking/ServiceLoop.vue';
 import StepperBookings from '@/components/custom/StepperBookings.vue';
 import { useBookingStore } from '@/stores/bookingStore';
 
