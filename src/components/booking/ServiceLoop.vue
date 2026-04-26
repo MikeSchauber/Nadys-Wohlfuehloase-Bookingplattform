@@ -3,7 +3,9 @@
         <div class="service-container">
             <span>Service Wählen</span>
             <div class="services">
-                <Card v-for="service in services" class="service-card">
+                <Card v-for="service in services" class="service-card"
+                    :class="{ active: bookingStore.service === service.name }"
+                    @click="bookingStore.setService(service.name)">
                     <CardContent class="service-content">
                         <div class="service-img-content">
                             <img :src="service.image_path" :alt="service.image_alt">
@@ -24,8 +26,10 @@
         <div class="location-container">
             <span>Standort Wählen</span>
             <div class="locations">
-                <Card v-for="location in locations" class="location-card">
-                    <CardContent class="location-content">
+                <Card v-for="location in locations" class="location-card"
+                    :class="{ active: bookingStore.location === location.name }"
+                    @click="bookingStore.setLocation(location.name)">
+                    <CardContent class=" location-content">
                         <div class="location-text-content">
                             <span>{{ location.emoji }}</span>
                             <h4>{{ location.name }}</h4>
@@ -47,9 +51,9 @@ import { getTableData } from '@/services/databaseService';
 import { onMounted, ref } from 'vue';
 import Card from '../ui/card/Card.vue';
 import CardContent from '../ui/card/CardContent.vue';
-import CardHeader from '../ui/card/CardHeader.vue';
-import CardFooter from '../ui/card/CardFooter.vue';
+import { useBookingStore } from '@/stores/bookingStore';
 
+const bookingStore = useBookingStore()
 
 const services = ref<Service[]>([])
 const locations = ref<Location[]>([])
@@ -57,7 +61,8 @@ const locations = ref<Location[]>([])
 onMounted(async () => {
     services.value = await getTableData("services", "service_type", true)
     locations.value = await getTableData("locations", "id", true)
-    console.log(services.value);
+
+    bookingStore.setLocation(locations.value[2].name)
 
 })
 </script>
@@ -100,6 +105,13 @@ onMounted(async () => {
         transform: scale(1.01);
         box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.349);
     }
+}
+
+.active {
+    background-color: color-mix(in srgb, var(--primary-hover) 20%, transparent);
+    border-color: var(--primary-hover);
+    transform: scale(1.01);
+    box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.349);
 }
 
 .service-content,
