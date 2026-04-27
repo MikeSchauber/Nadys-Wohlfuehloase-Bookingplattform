@@ -35,7 +35,7 @@
             <TransitionGroup name="fade-up" tag="div" class="locations">
                 <Card v-for="location, i in locations" :key="location.id" class="location-card"
                     :class="{ active: bookingStore.locationId === location.id }"
-                    :style="{ animationDelay: `${i * 80}ms` }" @click="bookingStore.setLocationId(location.id)">
+                    :style="{ animationDelay: `${i * 80}ms` }" @click="getOtherServices(location.id)">
                     <CardContent class=" location-content">
                         <div class="location-text-content">
                             <span>{{ location.emoji }}</span>
@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 import type { Location, Service } from '@/interfaces/interfaces';
-import { nextTick, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import Card from '../ui/card/Card.vue';
 import CardContent from '../ui/card/CardContent.vue';
 import { useBookingStore } from '@/stores/bookingStore';
@@ -74,6 +74,13 @@ onMounted(async () => {
 
 })
 
+async function getOtherServices(id: string) {
+    bookingStore.loadingAvailable();
+    services.value = []
+    bookingStore.setLocationId(id)
+    services.value = await bookingStore.getServicesByLocation()
+    bookingStore.loadingDisabled();
+}
 
 </script>
 

@@ -8,8 +8,9 @@ export const useBookingStore = defineStore("booking", {
   }),
   getters: {},
   actions: {
-    setLocationId(id: string) {
+    async setLocationId(id: string) {
       this.locationId = id;
+      if (this.locationId) await this.getServicesByLocation();
     },
 
     setService(service: string) {
@@ -28,12 +29,12 @@ export const useBookingStore = defineStore("booking", {
       const locations = await getTableData("locations", "prio_number", true);
       this.locationId = locations[0].id;
       console.log(locations);
-      
+
       return locations;
     },
 
     async getServicesByLocation() {
-      return await getTableData("services", "service_type", true, "prio_number", this.locationId);
+      return await getTableData("services", "prio_number", true, "location_id", this.locationId);
     },
   },
 });
