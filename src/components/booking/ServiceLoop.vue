@@ -1,8 +1,10 @@
 <template>
+    <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
     <div class="booking-container">
-        <div class="service-container">
+        <div v-if="!bookingStore.loading" class="service-container">
             <span>Service Wählen</span>
             <div class="services">
+
                 <Card v-for="service in services" class="service-card"
                     :class="{ active: bookingStore.service === service.id }"
                     @click="bookingStore.setService(service.id)">
@@ -15,7 +17,7 @@
                             <div class="service-text-description">
                                 <span>{{ service.description }}</span>
                                 <span v-for="(minutes, key, index) in service.duration" :key="key">
-                                    {{ minutes }} Min <span v-if="index === 0"> - </span>
+                                    {{ minutes }} Min <span> - </span>
                                 </span>
                             </div>
                         </div>
@@ -23,12 +25,12 @@
                 </Card>
             </div>
         </div>
-        <div class="location-container">
+        <div v-if="!bookingStore.loading" class="location-container">
             <span>Standort Wählen</span>
             <div class="locations">
                 <Card v-for="location in locations" class="location-card"
-                    :class="{ active: bookingStore.location === location.id }"
-                    @click="bookingStore.setLocation(location.id)">
+                    :class="{ active: bookingStore.locationId === location.id }"
+                    @click="bookingStore.setLocationId(location.id)">
                     <CardContent class=" location-content">
                         <div class="location-text-content">
                             <span>{{ location.emoji }}</span>
@@ -47,11 +49,12 @@
 
 <script setup lang="ts">
 import type { Location, Service } from '@/interfaces/interfaces';
-import { getTableData } from '@/services/databaseService';
 import { onMounted, ref } from 'vue';
 import Card from '../ui/card/Card.vue';
 import CardContent from '../ui/card/CardContent.vue';
 import { useBookingStore } from '@/stores/bookingStore';
+import Spinner from '../ui/spinner/Spinner.vue';
+import LoadingBanner from '../shared/LoadingBanner.vue';
 
 const bookingStore = useBookingStore()
 
@@ -59,21 +62,25 @@ const services = ref<Service[]>([])
 const locations = ref<Location[]>([])
 
 onMounted(async () => {
-    services.value = await getTableData("services", "service_type", true)
-    locations.value = await getTableData("locations", "id", true)
+    bookingStore.loadingAvailable();
 
-    bookingStore.setLocation(locations.value[0].id)
-
+    locations.value = await bookingStore.getLocations()
+    services.value = await bookingStore.getServicesByLocation()
+    bookingStore.loadingDisabled();
 })
+
+
 </script>
 
 <style scoped>
-
 .booking-container {
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+    height: 100%;
     color: var(--primary);
 }
 
@@ -142,7 +149,7 @@ onMounted(async () => {
     justify-content: center;
     gap: 4px;
     height: 100%;
-   padding-right: 12px;
+    padding-right: 12px;
 
 
 

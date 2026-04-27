@@ -40,9 +40,9 @@ async function createQuery(
 }
 
 export const refactorDates = async (array: any) => {
-  //   array.forEach((element) => {
-  //     const rawDate = element.DTINSERT;
-  //     const dateObject = new Date(rawDate);
-  //     element.DTINSERT = dateObject.toLocaleDateString("de-DE");
-  //   });
+  array.forEach((element: any) => {
+    const rawDate = element.created_at;
+    const dateObject = new Date(rawDate);
+    element.DTINSERT = dateObject.toLocaleDateString("de-DE");
+  });
 };
