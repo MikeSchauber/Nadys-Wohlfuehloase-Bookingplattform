@@ -25,13 +25,15 @@ export const useBookingStore = defineStore("booking", {
     },
 
     async getLocations() {
-      const locations = await getTableData("locations", "id", true);
+      const locations = await getTableData("locations", "prio_number", true);
       this.locationId = locations[0].id;
+      console.log(locations);
+      
       return locations;
     },
 
     async getServicesByLocation() {
-      return await getTableData("services", "service_type", true, "location_id", this.locationId);
+      return await getTableData("services", "service_type", true, "prio_number", this.locationId);
     },
   },
 });

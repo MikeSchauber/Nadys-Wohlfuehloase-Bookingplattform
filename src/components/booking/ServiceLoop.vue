@@ -72,9 +72,6 @@ onMounted(async () => {
     services.value = await bookingStore.getServicesByLocation()
     bookingStore.loadingDisabled();
 
-
-    await nextTick()
-
 })
 
 
@@ -107,7 +104,7 @@ onMounted(async () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 38px;
     height: 100%;
     color: var(--primary);
 }

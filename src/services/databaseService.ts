@@ -10,7 +10,7 @@ export const getTableData = async (
 ) => {
   const { data, error } = await createQuery(table, orderedBy, asc, filterColumn, filterValue, queryString);
 
-  refactorDates(data);
+  await refactorDates(data);
 
   if (error) throw error;
   return data;
@@ -43,6 +43,6 @@ export const refactorDates = async (array: any) => {
   array.forEach((element: any) => {
     const rawDate = element.created_at;
     const dateObject = new Date(rawDate);
-    element.DTINSERT = dateObject.toLocaleDateString("de-DE");
+    element.created_at = dateObject.toLocaleDateString("de-DE");
   });
 };

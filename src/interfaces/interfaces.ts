@@ -18,5 +18,6 @@ export interface Location {
   address: string;
   is_active: string;
   created_at: string;
-  emoji: string
+  emoji: string;
+  prio_number: number;
 }

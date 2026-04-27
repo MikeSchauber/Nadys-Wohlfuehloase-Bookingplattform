@@ -21,6 +21,9 @@ const bookingStore = useBookingStore()
 
 <style scoped>
 .booking-page {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
     h1 {
         color: var(--primary);
     }
