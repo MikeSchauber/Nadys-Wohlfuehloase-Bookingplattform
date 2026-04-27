@@ -1,12 +1,13 @@
 <template>
     <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
     <div class="booking-container">
-        <div v-if="!bookingStore.loading" class="service-container">
-            <span>Service Wählen</span>
-            <div class="services">
 
-                <Card v-for="service in services" class="service-card"
-                    :class="{ active: bookingStore.service === service.id }"
+        <div class="service-container">
+            <span>Service Wählen</span>
+            <TransitionGroup name="fade-up" tag="div" class="services">
+
+                <Card v-for="service, i in services" :key="service.id" class="service-card"
+                    :class="{ active: bookingStore.service === service.id }" :style="{ animationDelay: `${i * 80}ms` }"
                     @click="bookingStore.setService(service.id)">
                     <CardContent class="service-content">
                         <div class="service-img-content">
@@ -16,21 +17,25 @@
                             <h4>{{ service.name }}</h4>
                             <div class="service-text-description">
                                 <span>{{ service.description }}</span>
-                                <span v-for="(minutes, key, index) in service.duration" :key="key">
+                                <span v-for="(minutes, key) in service.duration" :key="key">
                                     {{ minutes }} Min <span> - </span>
                                 </span>
                             </div>
                         </div>
                     </CardContent>
                 </Card>
-            </div>
+
+
+            </TransitionGroup>
         </div>
+
+
         <div v-if="!bookingStore.loading" class="location-container">
             <span>Standort Wählen</span>
-            <div class="locations">
-                <Card v-for="location in locations" class="location-card"
+            <TransitionGroup name="fade-up" tag="div" class="locations">
+                <Card v-for="location, i in locations" :key="location.id" class="location-card"
                     :class="{ active: bookingStore.locationId === location.id }"
-                    @click="bookingStore.setLocationId(location.id)">
+                    :style="{ animationDelay: `${i * 80}ms` }" @click="bookingStore.setLocationId(location.id)">
                     <CardContent class=" location-content">
                         <div class="location-text-content">
                             <span>{{ location.emoji }}</span>
@@ -42,18 +47,17 @@
 
                     </CardContent>
                 </Card>
-            </div>
+            </TransitionGroup>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import type { Location, Service } from '@/interfaces/interfaces';
-import { onMounted, ref } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
 import Card from '../ui/card/Card.vue';
 import CardContent from '../ui/card/CardContent.vue';
 import { useBookingStore } from '@/stores/bookingStore';
-import Spinner from '../ui/spinner/Spinner.vue';
 import LoadingBanner from '../shared/LoadingBanner.vue';
 
 const bookingStore = useBookingStore()
@@ -67,12 +71,36 @@ onMounted(async () => {
     locations.value = await bookingStore.getLocations()
     services.value = await bookingStore.getServicesByLocation()
     bookingStore.loadingDisabled();
+
+
+    await nextTick()
+
 })
 
 
 </script>
 
 <style scoped>
+.fade-up-enter-from {
+    opacity: 0;
+}
+
+.fade-up-enter-active {
+    animation: fadeUp 250ms ease-in-out both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .booking-container {
     width: 100%;
     display: flex;
