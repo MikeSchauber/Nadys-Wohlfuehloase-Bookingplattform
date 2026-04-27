@@ -68,6 +68,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+
 .booking-container {
     width: 100%;
     display: flex;
@@ -99,11 +100,10 @@ onMounted(async () => {
     color: var(--primary);
 
     &:hover {
-
         background-color: color-mix(in srgb, var(--primary-hover) 20%, transparent);
         border-color: var(--primary-hover);
         transform: scale(1.01);
-        box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.349);
+        box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.45);
     }
 }
 
@@ -111,7 +111,7 @@ onMounted(async () => {
     background-color: color-mix(in srgb, var(--primary-hover) 20%, transparent);
     border-color: var(--primary-hover);
     transform: scale(1.01);
-    box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.349);
+    box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.45);
 }
 
 .service-content,
@@ -128,7 +128,6 @@ onMounted(async () => {
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
     }
-
 }
 
 .location-content {
@@ -143,6 +142,7 @@ onMounted(async () => {
     justify-content: center;
     gap: 4px;
     height: 100%;
+   padding-right: 12px;
 
 
 
@@ -162,7 +162,7 @@ onMounted(async () => {
 }
 
 
-
+/* Grid */
 .services,
 .locations {
     display: grid;

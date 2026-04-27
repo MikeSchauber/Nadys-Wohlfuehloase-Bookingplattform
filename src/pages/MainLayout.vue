@@ -27,8 +27,6 @@ const route = useRoute()
 
 
 onMounted(() => {
-    console.log(bookingStore.service);
-
     if (bookingStore.service === "") {
         router.push("/bookings")
     }
