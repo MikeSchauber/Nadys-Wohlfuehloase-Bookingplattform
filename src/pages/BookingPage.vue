@@ -9,7 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import ServiceLoop from '@/components/booking/ServiceLoop.vue';
+
+import ServiceLoop from '@/components/custom/booking/ServiceLoop.vue';
 import StepperBookings from '@/components/custom/StepperBookings.vue';
 import { useBookingStore } from '@/stores/bookingStore';
 

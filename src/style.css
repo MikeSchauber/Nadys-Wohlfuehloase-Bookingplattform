@@ -133,7 +133,7 @@ h2 {
   font-family: var(--heading);
   font-weight: 300;
   line-height: 100%;
-  color: var(--text);
+  /* color: var(--text); */
   margin: 0;
 }
 

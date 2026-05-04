@@ -1,10 +1,13 @@
+import type { Service } from "@/interfaces/interfaces";
 import { getTableData } from "@/services/databaseService";
 import { defineStore } from "pinia";
 export const useBookingStore = defineStore("booking", {
   state: () => ({
     loading: false,
-    service: "",
+    serviceId: "",
+    serviceObject: null as Service | null,
     locationId: "",
+    serviceDurations: [],
   }),
   getters: {},
   actions: {
@@ -13,11 +16,12 @@ export const useBookingStore = defineStore("booking", {
       if (this.locationId) await this.getServicesByLocation();
     },
 
-    setService(service: string) {
-      this.service = service;
+    setService(service: Service) {
+      this.serviceId = service.id;
+      this.serviceObject = service;
     },
 
-    loadingAvailable() {
+    loadingActive() {
       this.loading = true;
     },
 
@@ -28,13 +32,23 @@ export const useBookingStore = defineStore("booking", {
     async getLocations() {
       const locations = await getTableData("locations", "prio_number", true);
       this.locationId = locations[0].id;
-      console.log(locations);
 
       return locations;
     },
 
     async getServicesByLocation() {
       return await getTableData("services", "prio_number", true, "location_id", this.locationId);
+    },
+
+    setTimeSlots() {
+      let result = null;
+      if (this.serviceObject) {
+        result = Object.keys(this.serviceObject.duration).map((key) => ({
+          key,
+          value: this.serviceObject?.duration[key],
+        }));
+      }
+      console.log(result);
     },
   },
 });
