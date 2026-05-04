@@ -7,7 +7,8 @@ export const useBookingStore = defineStore("booking", {
     serviceId: "",
     serviceObject: null as Service | null,
     locationId: "",
-    serviceDurations: [],
+    serviceDurations: [] as { key: string; value: number }[],
+    durationKey: "",
   }),
   getters: {},
   actions: {
@@ -41,14 +42,22 @@ export const useBookingStore = defineStore("booking", {
     },
 
     setTimeSlots() {
-      let result = null;
-      if (this.serviceObject) {
-        result = Object.keys(this.serviceObject.duration).map((key) => ({
-          key,
-          value: this.serviceObject?.duration[key],
-        }));
-      }
-      console.log(result);
+      const service = this.serviceObject;
+      console.log(service);
+
+      if (!service) return;
+
+      this.serviceDurations = Object.keys(service.duration).map((key) => ({
+        key,
+        value: service.duration[key],
+      }));
+
+      console.log(this.serviceDurations);
+    },
+
+    setDurationKey(key: string) {
+      this.durationKey = key;
+      console.log(this.durationKey);
     },
   },
 });

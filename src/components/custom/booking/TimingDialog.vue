@@ -15,19 +15,35 @@ import SelectContent from '@/components/ui/select/SelectContent.vue';
 import SelectItem from '@/components/ui/select/SelectItem.vue';
 import SelectTrigger from '@/components/ui/select/SelectTrigger.vue';
 import SelectValue from '@/components/ui/select/SelectValue.vue';
-import { onMounted } from 'vue';
+import { useBookingStore } from '@/stores/bookingStore';
+import { onMounted, ref } from 'vue';
+
+const bookingStore = useBookingStore()
 
 const props = defineProps<{
     TimeRanges: Record<string, number>
 }>()
 
+const dialogOpen = ref(false)
+
+const durations = ref<{ key: string; value: number }[]>([])
+
+function chooseService() {
+    bookingStore.setTimeSlots()
+    durations.value = bookingStore.serviceDurations
+}
+
+function nextBookingStep() {
+    
+}
+
 </script>
 
 <template>
-    <Dialog>
-        <form class="form-dialog">
+    <Dialog v-model:open="dialogOpen">
+        <form @submit="nextBookingStep()" class="form-dialog">
             <DialogTrigger as-child>
-                <Button class="opener-btn" variant="outline">
+                <Button @click="chooseService()" class="opener-btn" variant="outline">
                     Bestätigen
                 </Button>
             </DialogTrigger>
@@ -45,8 +61,9 @@ const props = defineProps<{
                                 <SelectValue placeholder="Zeitraum auswählen" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="apple">
-                                    Apple
+                                <SelectItem v-for="duration in durations" :value="duration.key"
+                                    @click="bookingStore.setDurationKey(duration.key)">
+                                    {{ duration.value }} Minuten
                                 </SelectItem>
                             </SelectContent>
                         </Select>

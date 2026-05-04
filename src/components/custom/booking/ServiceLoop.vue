@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import type { Location, Service } from '@/interfaces/interfaces';
 import { onMounted, ref } from 'vue';
-
-
 import { useBookingStore } from '@/stores/bookingStore';
 import CardContent from '@/components/ui/card/CardContent.vue';
 import Card from '@/components/ui/card/Card.vue';
 import LoadingBanner from '@/components/shared/LoadingBanner.vue';
-import Button from '@/components/ui/button/Button.vue';
 import TimingDialog from './TimingDialog.vue';
 
 
@@ -16,8 +13,8 @@ const bookingStore = useBookingStore()
 const services = ref<Service[]>([])
 const locations = ref<Location[]>([])
 
-const isServiceChoosen = ref(false)
-const choosenService = ref<Service | null>(null)
+// const isServiceChoosen = ref(false)
+// const choosenService = ref<Service | null>(null)
 
 onMounted(async () => {
     bookingStore.loadingActive();
@@ -40,23 +37,20 @@ async function getOtherServices(id: string) {
 
 function setService(service: Service) {
     bookingStore.setService(service)
-    choosenService.value = service
 }
 
-function chooseService() {
-    isServiceChoosen.value = true;
-    console.log(choosenService.value);
+// function chooseService() {
+//     bookingStore.setTimeSlots()
+//     console.log(bookingStore.serviceObject);
 
-    if (choosenService.value)
-        bookingStore.setTimeSlots()
-}
+// }
 
 </script>
 
 <template>
     <div>
         <div class="booking-container">
-            <div v-if="!isServiceChoosen">
+            <div>
                 <div class="location-container">
                     <span>Standort Wählen</span>
                     <div class="locations">
@@ -102,19 +96,20 @@ function chooseService() {
                 </div>
             </div>
 
-            <div v-if="isServiceChoosen" class="service-container">
+            <!-- <div class="service-container">
                 <span>Zeiten auswählen</span>
                 <div class="services">
                     <Card class="service-card">
                         <CardContent class="service-content">
                             <div class="service-img-content">
-                                <img :src="choosenService?.image_path" :alt="choosenService?.image_alt">
+                                <img :src="bookingStore.serviceObject?.image_path"
+                                    :alt="bookingStore.serviceObject?.image_alt">
                             </div>
                             <div class="service-text-content">
-                                <h4>{{ choosenService?.name }}</h4>
+                                <h4>{{ bookingStore.serviceObject?.name }}</h4>
                                 <div class="service-text-description">
-                                    <span>{{ choosenService?.description }}</span>
-                                    <span v-for="(minutes, key) in choosenService?.duration" :key="key">
+                                    <span>{{ bookingStore.serviceObject?.description }}</span>
+                                    <span v-for="(minutes, key) in bookingStore.serviceObject?.duration" :key="key">
                                         {{ minutes }} Min <span> - </span>
                                     </span>
                                 </div>
@@ -122,9 +117,9 @@ function chooseService() {
                         </CardContent>
                     </Card>
                 </div>
-            </div>
-            <TimingDialog :-time-ranges="choosenService?.duration" class="choose-btn"
-                v-if="!bookingStore.loading && bookingStore.serviceId.length > 0" @click="chooseService()">
+            </div> -->
+            <TimingDialog :-time-ranges="bookingStore.serviceObject?.duration" class="choose-btn"
+                v-if="!bookingStore.loading && bookingStore.serviceId.length > 0">
             </TimingDialog>
             <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
         </div>
