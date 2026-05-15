@@ -17,7 +17,7 @@ onMounted(async () => {
     bookingStore.loadingActive();
 
     locations.value = await bookingStore.getLocations()
-    services.value = await bookingStore.getServicesByLocation()
+    // services.value = await bookingStore.getServicesByLocation()
     bookingStore.loadingDisabled();
 
 })
@@ -63,7 +63,7 @@ function setService(service: Service) {
                     </div>
                 </div>
 
-                <div class="service-container">
+                <div v-if="bookingStore.locationId" class="service-container">
                     <span>Service Wählen</span>
                     <div class="services">
                         <Card v-for="service, i in services" :key="service.id" class="service-card"
@@ -84,14 +84,15 @@ function setService(service: Service) {
                             </CardContent>
                         </Card>
                     </div>
+                    <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
                 </div>
-        </div>
+            </div>
 
-        <TimingDialog :-time-ranges="bookingStore.serviceObject?.duration" class="choose-btn"
-            v-if="!bookingStore.loading && bookingStore.serviceId.length > 0">
-        </TimingDialog>
-        <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
-    </div>
+            <TimingDialog :-time-ranges="bookingStore.serviceObject?.duration" class="choose-btn"
+                v-if="!bookingStore.loading && bookingStore.serviceId.length > 0">
+            </TimingDialog>
+
+        </div>
     </div>
 </template>
 
@@ -120,17 +121,15 @@ function setService(service: Service) {
 
 .booking-container {
 
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 38px;
-        height: 100%;
-        color: var(--primary);
-        margin-bottom: 24px
-    
-
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 38px;
+    height: 100%;
+    color: var(--primary);
+    margin-bottom: 24px
 }
 
 .service-container,
