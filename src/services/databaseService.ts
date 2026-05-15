@@ -1,5 +1,6 @@
 import { supabase } from "@/supabase/supabase";
 
+
 export const getTableData = async (
   table: string,
   orderedBy: string,
@@ -10,7 +11,7 @@ export const getTableData = async (
 ) => {
   const { data, error } = await createQuery(table, orderedBy, asc, filterColumn, filterValue, queryString);
 
-  refactorDates(data);
+  await refactorDates(data);
 
   if (error) throw error;
   return data;
@@ -40,9 +41,9 @@ async function createQuery(
 }
 
 export const refactorDates = async (array: any) => {
-  //   array.forEach((element) => {
-  //     const rawDate = element.DTINSERT;
-  //     const dateObject = new Date(rawDate);
-  //     element.DTINSERT = dateObject.toLocaleDateString("de-DE");
-  //   });
+  array.forEach((element: any) => {
+    const rawDate = element.created_at;
+    const dateObject = new Date(rawDate);
+    element.created_at = dateObject.toLocaleDateString("de-DE");
+  });
 };

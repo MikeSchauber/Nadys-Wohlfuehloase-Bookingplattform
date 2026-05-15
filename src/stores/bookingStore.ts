@@ -1,42 +1,61 @@
 import type { Service } from "@/interfaces/interfaces";
+import { getTableData } from "@/services/databaseService";
 import { defineStore } from "pinia";
-import { useRouter } from "vue-router";
-
 export const useBookingStore = defineStore("booking", {
   state: () => ({
-    service: "",
-    router: useRouter(),
-    location: {},
+    loading: false,
+    serviceId: "",
+    activeService: null as Service | null,
+    locationId: "",
+    duration: "",
   }),
   getters: {},
   actions: {
-    evaluateServiceQuestion(serviceName: string) {
-      if (serviceName === "Event") {
-        this.setServiceToEvent();
-      }
-      if (serviceName === "Massage") {
-        this.setServiceToMassage();
-      }
-      if (serviceName === "Reiki") {
-        this.setServiceToReiki();
-      }
-      console.log(this.service);
+    async setLocationId(id: string) {
+      this.locationId = id;
+      if (this.locationId) await this.getServicesByLocation();
+    },
+
+    setService(service: Service) {
+      this.serviceId = service.id;
+      this.activeService = service;
+    },
+
+    resetService() {
+      this.serviceId = "";
+      this.activeService = null;
+    },
+
+    loadingActive() {
+      this.loading = true;
+    },
+
+    loadingDisabled() {
+      this.loading = false;
+    },
+
+    async getLocations() {
+      const locations = await getTableData("locations", "prio_number", true);
+
+      return locations;
+    },
+
+    async getServicesByLocation() {
+      this.resetService()
+      const services = await getTableData("services", "prio_number", true, "location_id", this.locationId);
+      console.log(services);
       
+      return services
     },
 
-    setServiceToEvent() {
-      this.service = "event";
-      this.router.push("/events");
+
+
+    setTimeSlots() {
+      const service = this.activeService;
     },
 
-    setServiceToMassage() {
-      this.service = "massage";
-      this.router.push("/bookings");
-    },
-
-    setServiceToReiki() {
-      this.service = "reiki";
-      this.router.push("/bookings");
+    setDurationKey(key: string) {
+      this.duration = key;
     },
   },
 });

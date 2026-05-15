@@ -27,9 +27,7 @@ const route = useRoute()
 
 
 onMounted(() => {
-    console.log(bookingStore.service);
-
-    if (bookingStore.service === "") {
+    if (bookingStore.serviceId === "") {
         router.push("/bookings")
     }
 })
@@ -46,19 +44,20 @@ onMounted(() => {
 }
 
 .app {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     background-color: white;
-    border-radius: var(--main-border-radius);
+    border-radius: 12px;
+    border: 2px solid var(--secondary);
     box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.572);
 }
 
 .header-section {
     background-color: var(--primary);
-    border-top-left-radius: var(--main-border-radius);
-    border-top-right-radius: var(--main-border-radius);
+    border-top-left-radius:10px;
+    border-top-right-radius: 10px;
     width: 100%;
 }
 

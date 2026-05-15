@@ -1,21 +1,16 @@
 <template>
-    <div>
+    <div class="booking-page">
         <StepperBookings></StepperBookings>
 
-        <main>
-            <div v-if="bookingStore.service === 'massage'">
-                <h1>Massage Bookings</h1>
-            </div>
-            <div v-if="bookingStore.service === 'reiki'">
-                <h1>Reiki Bookings</h1>
-            </div>
-        </main>
+        <ServiceLoop></ServiceLoop>
 
         <div></div>
     </div>
 </template>
 
 <script setup lang="ts">
+
+import ServiceLoop from '@/components/custom/booking/ServiceLoop.vue';
 import StepperBookings from '@/components/custom/StepperBookings.vue';
 import { useBookingStore } from '@/stores/bookingStore';
 
@@ -26,5 +21,12 @@ const bookingStore = useBookingStore()
 </script>
 
 <style scoped>
-
+.booking-page {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    h1 {
+        color: var(--primary);
+    }
+}
 </style>
