@@ -2,7 +2,8 @@
     <div class="booking-page">
         <StepperBookings></StepperBookings>
 
-        <ServiceLoop></ServiceLoop>
+
+        <ServiceLoop v-if="bookingStore.currentStep === 1"></ServiceLoop>
 
         <div></div>
     </div>
@@ -25,6 +26,7 @@ const bookingStore = useBookingStore()
     display: flex;
     flex-direction: column;
     gap: 38px;
+
     h1 {
         color: var(--primary);
     }

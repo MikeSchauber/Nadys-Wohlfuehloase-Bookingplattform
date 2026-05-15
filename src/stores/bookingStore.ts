@@ -8,6 +8,7 @@ export const useBookingStore = defineStore("booking", {
     activeService: null as Service | null,
     locationId: "",
     duration: "",
+    currentStep: 1,
   }),
   getters: {},
   actions: {
@@ -44,18 +45,24 @@ export const useBookingStore = defineStore("booking", {
       this.resetService()
       const services = await getTableData("services", "prio_number", true, "location_id", this.locationId);
       console.log(services);
-      
+
       return services
     },
-
-
 
     setTimeSlots() {
       const service = this.activeService;
     },
 
-    setDurationKey(key: string) {
-      this.duration = key;
+    setDuration(duration: string) {
+      this.duration = duration;
     },
+
+    resetDuration() {
+      this.duration = ""
+    },
+
+    nextBookingStep() {
+      this.currentStep += 1
+    }
   },
 });

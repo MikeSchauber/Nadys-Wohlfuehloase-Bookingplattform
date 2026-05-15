@@ -16,7 +16,7 @@ import SelectItem from '@/components/ui/select/SelectItem.vue';
 import SelectTrigger from '@/components/ui/select/SelectTrigger.vue';
 import SelectValue from '@/components/ui/select/SelectValue.vue';
 import { useBookingStore } from '@/stores/bookingStore';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 const bookingStore = useBookingStore()
 
@@ -31,6 +31,8 @@ function chooseService() {
 }
 
 function nextBookingStep() {
+    bookingStore.nextBookingStep()
+    dialogOpen.value = false
 
 }
 
@@ -38,14 +40,15 @@ function nextBookingStep() {
 
 <template>
     <Dialog v-model:open="dialogOpen">
-        <form @submit="nextBookingStep()" class="form-dialog">
-            <DialogTrigger as-child>
-                <Button @click="chooseService()" :disabled="bookingStore.serviceId.length === 0" class="opener-btn"
-                    variant="outline">
-                    Bestätigen
-                </Button>
-            </DialogTrigger>
-            <DialogContent class="sm:max-w-[425px]">
+
+        <DialogTrigger as-child>
+            <Button @click="chooseService()" :disabled="bookingStore.serviceId.length === 0" class="opener-btn"
+                variant="outline">
+                Bestätigen
+            </Button>
+        </DialogTrigger>
+        <DialogContent class="sm:max-w-[425px]">
+            <form @submit.prevent="nextBookingStep()" class="form-dialog">
                 <DialogHeader>
                     <DialogTitle>Zeitspanne auswählen</DialogTitle>
                     <DialogDescription>
@@ -60,7 +63,7 @@ function nextBookingStep() {
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem v-for="duration in bookingStore.activeService?.durations" :value="duration"
-                                    @click="bookingStore.setDurationKey(duration)">
+                                    @click="bookingStore.setDuration(duration)">
                                     {{ duration }} Minuten
                                 </SelectItem>
                             </SelectContent>
@@ -69,22 +72,26 @@ function nextBookingStep() {
                 </div>
                 <DialogFooter>
                     <DialogClose as-child>
-                        <Button variant="outline">
+                        <Button @click="bookingStore.resetDuration()" variant="outline">
                             Abbrechen
                         </Button>
                     </DialogClose>
-                    <Button type="submit">
+                    <Button :disabled="bookingStore.duration.length === 0" type="submit">
                         Weiter
                     </Button>
                 </DialogFooter>
-            </DialogContent>
-        </form>
+            </form>
+        </DialogContent>
+
     </Dialog>
 </template>
 
 <style scoped>
 .form-dialog {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px
 }
 
 .opener-btn {
