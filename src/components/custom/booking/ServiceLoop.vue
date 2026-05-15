@@ -68,7 +68,7 @@ function setService(service: Service) {
                                 </div>
                                 <div>
                                     <span>
-                                        <ImageZoom class="card-action-button"></ImageZoom>
+                                        <ImageZoom></ImageZoom>
                                     </span>
                                 </div>
 

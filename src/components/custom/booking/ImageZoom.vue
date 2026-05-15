@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
+import CardDescription from '@/components/ui/card/CardDescription.vue';
 import {
     Dialog,
     DialogContent,
     DialogTrigger,
 } from '@/components/ui/dialog'
+import DialogDescription from '@/components/ui/dialog/DialogDescription.vue';
+import DialogHeader from '@/components/ui/dialog/DialogHeader.vue';
+import DialogTitle from '@/components/ui/dialog/DialogTitle.vue';
 import { useBookingStore } from '@/stores/bookingStore';
-import { ZoomIn } from 'lucide-vue-next';
+import { Search } from 'lucide-vue-next';
 import { ref } from 'vue';
 
 const bookingStore = useBookingStore()
@@ -19,10 +23,17 @@ const dialogOpen = ref(false)
     <Dialog v-model:open="dialogOpen">
 
         <DialogTrigger as-child>
-            <ZoomIn @click="" class="card-action-button" />
+            <Search class="card-action-button" />
         </DialogTrigger>
         <DialogContent class="sm:max-w-[425px]">
-            <img :src="bookingStore.activeLocation?.image_path" :alt="bookingStore.activeLocation?.image_path">
+            <DialogHeader>
+                <DialogTitle>{{ bookingStore.activeLocation?.name }}</DialogTitle>
+                <DialogDescription>
+                    {{ bookingStore.activeLocation?.address }}
+                </DialogDescription>
+            </DialogHeader>
+            <img class="zoomed-image" :src="bookingStore.activeLocation?.image_path"
+                :alt="bookingStore.activeLocation?.image_path">
         </DialogContent>
 
     </Dialog>
@@ -37,12 +48,18 @@ const dialogOpen = ref(false)
     padding: 4px;
     transition: all 125ms ease-in-out;
 
+    box-shadow: 0px 0px 4px var(--primary);
 
     &:hover {
-        background-color: var(--primary);
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.539);
+
+        border-color: white !important;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.724);
         transform: scale(1.02);
     }
+}
+
+.zoomed-image {
+    border-radius: 8px;
 }
 
 .opener-btn {
