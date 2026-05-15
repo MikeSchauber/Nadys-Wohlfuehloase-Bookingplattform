@@ -54,18 +54,21 @@ function setService(service: Service) {
                             @click="getOtherServices(location.id)">
                             <CardContent class=" location-content">
                                 <!-- <span>{{ location.emoji }}</span> -->
-                                <div class="service-img-content">
-                                    <img :src="location.image_path" :alt="location.image_alt">
-                                </div>
-                                <div class="location-text-content">
-
-                                    <h4>{{ location.name }}</h4>
-                                    <div class="location-text-description">
-                                        <span>{{ location.address }}</span>
+                                <div class="location-details">
+                                    <div class="service-img-content">
+                                        <img :src="location.image_path" :alt="location.image_alt">
+                                    </div>
+                                    <div class="location-text-content">
+                                        <h4>{{ location.name }}</h4>
+                                        <div class="location-text-description">
+                                            <span>{{ location.address }}</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <ZoomIn />
+                                    <span>
+                                        <ZoomIn class="card-action-button" />
+                                    </span>
                                 </div>
 
                             </CardContent>
@@ -196,14 +199,37 @@ function setService(service: Service) {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
     padding: 0;
+    padding-right: 28px;
+
+
+}
+
+.location-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
 
     .service-img-content>img {
         height: 100px;
         width: auto;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
+    }
+}
+
+.card-action-button {
+    border-radius: 100px;
+    border: 1px solid white;
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+
+    &:hover {
+        background-color: var(--primary);
     }
 }
 
