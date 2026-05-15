@@ -33,12 +33,12 @@ const props = withDefaults(defineProps<Props>(), {
 
   }
 
-  button:disabled {
+  /* button:disabled {
     opacity: 100% !important;
     background-color: rgb(174, 174, 174) !important;
     color: black !important;
     
-  }
+  } */
 }
 
 .button {

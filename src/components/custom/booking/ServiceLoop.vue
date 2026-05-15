@@ -6,6 +6,7 @@ import CardContent from '@/components/ui/card/CardContent.vue';
 import Card from '@/components/ui/card/Card.vue';
 import LoadingBanner from '@/components/shared/LoadingBanner.vue';
 import TimingDialog from './TimingDialog.vue';
+import { Search, ZoomIn } from 'lucide-vue-next';
 
 
 const bookingStore = useBookingStore()
@@ -52,13 +53,19 @@ function setService(service: Service) {
                             :class="{ active: bookingStore.locationId === location.id }"
                             @click="getOtherServices(location.id)">
                             <CardContent class=" location-content">
-                                <span>{{ location.emoji }}</span>
+                                <!-- <span>{{ location.emoji }}</span> -->
+                                <div class="service-img-content">
+                                    <img :src="location.image_path" :alt="location.image_alt">
+                                </div>
                                 <div class="location-text-content">
 
                                     <h4>{{ location.name }}</h4>
                                     <div class="location-text-description">
                                         <span>{{ location.address }}</span>
                                     </div>
+                                </div>
+                                <div>
+                                    <ZoomIn />
                                 </div>
 
                             </CardContent>
@@ -158,6 +165,7 @@ function setService(service: Service) {
     transition: all 150ms ease-in-out;
     color: var(--primary);
     border: none;
+    box-shadow: 0px 0px 6px 0px rgba(49, 49, 49, 0.448);
 
     &:hover {
         background-color: var(--primary-hover);
@@ -199,9 +207,9 @@ function setService(service: Service) {
     }
 }
 
-.location-content {
-    padding: 12px 24px;
-}
+/* .location-content {
+        padding: 12px 24px;
+    } */
 
 .service-text-content,
 .location-text-content {

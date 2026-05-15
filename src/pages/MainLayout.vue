@@ -66,11 +66,10 @@ onMounted(() => {
     padding: var(--inner-padding);
     padding-top: 22px;
     width: 100%;
-   border-bottom-left-radius: 12px;
-   border-bottom-right-radius: 12px;
-    background-image: url("../assets/img/moessingen_belsen.avif");
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    /* background-image: url("../assets/img/moessingen_belsen.avif");
     background-size: cover;
-    background-position: 25% 0%;
-    min-height: min-content;
+    background-position: 25% 0%; */
 }
 </style>
