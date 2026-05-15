@@ -3,8 +3,8 @@
         <StepperBookings></StepperBookings>
 
 
-        <div v-if="bookingStore.currentStep === 1">
-            <ServiceLoop></ServiceLoop>
+        <div>
+            <ServiceLoop v-if="bookingStore.currentStep === 1"></ServiceLoop>
         </div>
         <div class="navigaton-button-section">
             <Button v-if="bookingStore.currentStep > 1" @click="bookingStore.previousBookingStep()">Zurück</Button>
