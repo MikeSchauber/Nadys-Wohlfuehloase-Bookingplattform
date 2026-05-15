@@ -63,7 +63,7 @@ watch(
 }
 
 .icons {
-    transform: scale(1.2);
+    /* transform: scale(1.2); */
 }
 
 @media(max-width: 800px) {

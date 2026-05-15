@@ -35,9 +35,13 @@ const bookingStore = useBookingStore()
     flex-direction: column;
     gap: 38px;
 
+    background-size: cover;
+
     h1 {
         color: var(--primary);
     }
+
+
 }
 
 .navigaton-button-section {

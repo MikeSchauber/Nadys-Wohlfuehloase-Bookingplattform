@@ -156,21 +156,23 @@ function setService(service: Service) {
     cursor: pointer;
     transition: all 150ms ease-in-out;
     color: var(--primary);
+    border: none;
 
     &:hover {
-        background-color: color-mix(in srgb, var(--primary-hover) 20%, transparent);
-        border-color: var(--primary-hover);
+        background-color: var(--primary-hover);
         transform: scale(1.01);
-        box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.45);
+        box-shadow: 0px 0px 8px 0px rgb(49, 49, 49);
+        color: white;
     }
 }
 
 /* Animation */
 .active {
-    background-color: color-mix(in srgb, var(--primary-hover) 20%, transparent);
+    background-color: var(--primary-hover);
     border-color: var(--primary-hover);
     transform: scale(1.01);
-    box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.45);
+    box-shadow: 0px 0px 8px 0px rgb(49, 49, 49);
+    color: white;
 }
 
 .no-animation {

@@ -50,13 +50,14 @@ onMounted(() => {
     flex-direction: column;
     background-color: white;
     border-radius: 12px;
-    border: 2px solid var(--secondary);
+    /* border: 2px solid var(--secondary); */
     box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.572);
+
 }
 
 .header-section {
     background-color: var(--primary);
-    border-top-left-radius:10px;
+    border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 100%;
 }
@@ -65,5 +66,10 @@ onMounted(() => {
     padding: var(--inner-padding);
     padding-top: 22px;
     width: 100%;
+
+    background-image: url("../assets/img/moessingen_belsen.avif");
+    background-size: cover;
+    background-position: 25% 75%;
+    min-height: min-content;
 }
 </style>
