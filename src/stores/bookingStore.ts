@@ -7,7 +7,7 @@ export const useBookingStore = defineStore("booking", {
     serviceId: "",
     activeService: null as Service | null,
     locationId: "",
-    durationKey: "",
+    duration: "",
   }),
   getters: {},
   actions: {
@@ -55,7 +55,7 @@ export const useBookingStore = defineStore("booking", {
     },
 
     setDurationKey(key: string) {
-      this.durationKey = key;
+      this.duration = key;
     },
   },
 });
