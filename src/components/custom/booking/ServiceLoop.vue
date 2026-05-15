@@ -76,9 +76,11 @@ function setService(service: Service) {
                                     <h4>{{ service.name }}</h4>
                                     <div class="service-text-description">
                                         <span>{{ service.description }}</span>
-                                        <span v-for="(minutes, key) in service.duration" :key="key">
-                                            {{ minutes }} Min <span> - </span>
+                                        <span>
+                                            {{ service.duration[0] }} Min
                                         </span>
+                                        <span> - </span>
+                                        <span>{{ service.duration[service.duration.length - 1] }} Min</span>
                                     </div>
                                 </div>
                             </CardContent>

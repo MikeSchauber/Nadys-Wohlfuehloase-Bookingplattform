@@ -37,7 +37,17 @@ export const useBookingStore = defineStore("booking", {
     },
 
     async getServicesByLocation() {
-      return await getTableData("services", "prio_number", true, "location_id", this.locationId);
+      const services = await getTableData("services", "prio_number", true, "location_id", this.locationId);
+      const parsedServices = this.parseDurationsToArrays(services)
+      return parsedServices
+    },
+
+    parseDurationsToArrays(services: Service[]) {
+      services.forEach(element => {
+        const durationAsArray = Object.values(element.duration)
+        element.duration = durationAsArray
+      });
+      return services
     },
 
     setTimeSlots() {
@@ -50,13 +60,10 @@ export const useBookingStore = defineStore("booking", {
         key,
         value: service.duration[key],
       }));
-
-      console.log(this.serviceDurations);
     },
 
     setDurationKey(key: string) {
       this.durationKey = key;
-      console.log(this.durationKey);
     },
   },
 });
