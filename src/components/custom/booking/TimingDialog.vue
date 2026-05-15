@@ -26,11 +26,8 @@ const props = defineProps<{
 
 const dialogOpen = ref(false)
 
-const durations = ref<{ key: string; value: number }[]>([])
-
 function chooseService() {
     bookingStore.setTimeSlots()
-    durations.value = bookingStore.serviceDurations
 }
 
 function nextBookingStep() {
@@ -62,9 +59,9 @@ function nextBookingStep() {
                                 <SelectValue placeholder="Zeitraum auswählen" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem v-for="duration in durations" :value="duration.key"
-                                    @click="bookingStore.setDurationKey(duration.key)">
-                                    {{ duration.value }} Minuten
+                                <SelectItem v-for="duration in bookingStore.activeService?.durations" :value="duration"
+                                    @click="bookingStore.setDurationKey(duration)">
+                                    {{ duration }} Minuten
                                 </SelectItem>
                             </SelectContent>
                         </Select>

@@ -2,7 +2,7 @@ export interface Service {
   id: string;
   location_id: string;
   name: string;
-  duration: number[];
+  durations: string[];
   price_cents: number;
   is_active: boolean;
   created_at: string;

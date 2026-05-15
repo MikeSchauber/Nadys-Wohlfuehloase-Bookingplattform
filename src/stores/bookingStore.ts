@@ -5,9 +5,8 @@ export const useBookingStore = defineStore("booking", {
   state: () => ({
     loading: false,
     serviceId: "",
-    serviceObject: null as Service | null,
+    activeService: null as Service | null,
     locationId: "",
-    serviceDurations: [] as { key: string; value: number }[],
     durationKey: "",
   }),
   getters: {},
@@ -19,12 +18,12 @@ export const useBookingStore = defineStore("booking", {
 
     setService(service: Service) {
       this.serviceId = service.id;
-      this.serviceObject = service;
+      this.activeService = service;
     },
 
     resetService() {
       this.serviceId = "";
-      this.serviceObject = null;
+      this.activeService = null;
     },
 
     loadingActive() {
@@ -44,20 +43,15 @@ export const useBookingStore = defineStore("booking", {
     async getServicesByLocation() {
       this.resetService()
       const services = await getTableData("services", "prio_number", true, "location_id", this.locationId);
-      const parsedServices = this.parseDurationsToArrays(services)
-      return parsedServices
-    },
-
-    parseDurationsToArrays(services: Service[]) {
-      services.forEach(element => {
-        const durationAsArray = Object.values(element.duration)
-        element.duration = durationAsArray
-      });
+      console.log(services);
+      
       return services
     },
 
+
+
     setTimeSlots() {
-      const service = this.serviceObject;
+      const service = this.activeService;
     },
 
     setDurationKey(key: string) {

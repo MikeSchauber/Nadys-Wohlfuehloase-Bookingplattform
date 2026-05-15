@@ -77,10 +77,10 @@ function setService(service: Service) {
                                     <div class="service-text-description">
                                         <span>{{ service.description }}</span>
                                         <span>
-                                            {{ service.duration[0] }} Min
+                                            {{ service.durations[0] }} Min
                                         </span>
                                         <span> - </span>
-                                        <span>{{ service.duration[service.duration.length - 1] }} Min</span>
+                                        <span>{{ service.durations[service.durations.length - 1] }} Min</span>
                                     </div>
                                 </div>
                             </CardContent>
@@ -90,9 +90,7 @@ function setService(service: Service) {
                 </div>
             </div>
 
-            <TimingDialog :-time-ranges="bookingStore.serviceObject?.duration" class="choose-btn"
-       
-           >
+            <TimingDialog :-time-ranges="bookingStore.activeService?.durations" class="choose-btn">
             </TimingDialog>
 
         </div>
