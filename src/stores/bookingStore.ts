@@ -1,21 +1,21 @@
-import type { Service } from "@/interfaces/interfaces";
+import type { Location, Service } from "@/interfaces/interfaces";
 import { getTableData } from "@/services/databaseService";
 import { defineStore } from "pinia";
 export const useBookingStore = defineStore("booking", {
   state: () => ({
     loading: false,
     serviceId: "",
+    activeLocation: null as Location | null,
     activeService: null as Service | null,
-    locationId: "",
     duration: "",
     currentStep: 1,
     serviceIsSetted: false
   }),
   getters: {},
   actions: {
-    async setLocationId(id: string) {
-      this.locationId = id;
-      if (this.locationId) await this.getServicesByLocation();
+    async setLocation(location: Location) {
+      this.activeLocation = location;
+      if (this.activeLocation) await this.getServicesByLocation();
     },
 
     setService(service: Service) {
@@ -35,7 +35,7 @@ export const useBookingStore = defineStore("booking", {
     },
 
     resetLocation() {
-      this.locationId = ""
+      this.activeLocation = null
     },
 
     loadingActive() {
@@ -56,7 +56,7 @@ export const useBookingStore = defineStore("booking", {
       if (!this.serviceIsSetted) {
         this.resetService()
       }
-      const services = await getTableData("services", "prio_number", true, "location_id", this.locationId);
+      const services = await getTableData("services", "prio_number", true, "location_id", this.activeLocation?.id);
 
       this.openServiceChoosing()
 

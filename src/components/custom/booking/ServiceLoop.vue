@@ -7,6 +7,7 @@ import Card from '@/components/ui/card/Card.vue';
 import LoadingBanner from '@/components/shared/LoadingBanner.vue';
 import TimingDialog from './TimingDialog.vue';
 import { Search, ZoomIn } from 'lucide-vue-next';
+import ImageZoom from './ImageZoom.vue';
 
 
 const bookingStore = useBookingStore()
@@ -18,7 +19,7 @@ onMounted(async () => {
     bookingStore.loadingActive();
 
     locations.value = await bookingStore.getLocations()
-    if (bookingStore.locationId) {
+    if (bookingStore.activeLocation) {
         services.value = await bookingStore.getServicesByLocation()
     }
 
@@ -26,11 +27,11 @@ onMounted(async () => {
 
 })
 
-async function getOtherServices(id: string) {
-    if (id !== bookingStore.locationId) {
+async function getOtherServices(location: Location) {
+    if (location.id !== bookingStore.activeLocation?.id) {
         bookingStore.loadingActive();
         services.value = [];
-        bookingStore.setLocationId(id)
+        bookingStore.setLocation(location)
         services.value = await bookingStore.getServicesByLocation()
         bookingStore.loadingDisabled();
     }
@@ -50,8 +51,8 @@ function setService(service: Service) {
                     <span>Standort Wählen</span>
                     <div class="locations">
                         <Card v-for="location, i in locations" :key="location.id" class="location-card"
-                            :class="{ active: bookingStore.locationId === location.id }"
-                            @click="getOtherServices(location.id)">
+                            :class="{ active: bookingStore.activeLocation?.id === location.id }"
+                            @click="getOtherServices(location)">
                             <CardContent class=" location-content">
                                 <!-- <span>{{ location.emoji }}</span> -->
                                 <div class="location-details">
@@ -67,7 +68,7 @@ function setService(service: Service) {
                                 </div>
                                 <div>
                                     <span>
-                                        <ZoomIn class="card-action-button" />
+                                        <ImageZoom class="card-action-button"></ImageZoom>
                                     </span>
                                 </div>
 
@@ -76,7 +77,7 @@ function setService(service: Service) {
                     </div>
                 </div>
 
-                <div v-if="bookingStore.locationId" class="service-container">
+                <div v-if="bookingStore.activeLocation" class="service-container">
                     <span>Service Wählen</span>
                     <div class="services">
                         <Card v-for="service, i in services" :key="service.id" class="service-card"
@@ -155,6 +156,10 @@ function setService(service: Service) {
     gap: 20px;
     padding: 0 !important;
 
+    >span {
+        font-weight: bolder;
+    }
+
     >h2 {
         color: var(--primary);
     }
@@ -204,7 +209,16 @@ function setService(service: Service) {
     padding: 0;
     padding-right: 28px;
 
+    .service-img-content>img {
+        height: 100px;
+        width: auto;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+}
 
+.service-content {
+    justify-content: flex-start;
 }
 
 .location-details {
@@ -221,17 +235,7 @@ function setService(service: Service) {
     }
 }
 
-.card-action-button {
-    border-radius: 100px;
-    border: 1px solid white;
-    width: 40px;
-    height: 40px;
-    padding: 4px;
 
-    &:hover {
-        background-color: var(--primary);
-    }
-}
 
 /* .location-content {
         padding: 12px 24px;
