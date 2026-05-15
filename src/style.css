@@ -25,7 +25,7 @@
   --input: oklch(0.88 0.04 295);
   --ring: oklch(0.55 0.18 295);
 
-  --muted: oklch(90.67% 0.0001 271.152 / 0.713);
+  --muted: oklch(74.763% 0.00008 271.152);
   --muted-foreground: oklch(0.45 0.04 295);
 
   --inner-padding: 12px 18px;

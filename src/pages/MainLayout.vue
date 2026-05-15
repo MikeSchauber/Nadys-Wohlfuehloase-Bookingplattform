@@ -44,7 +44,7 @@ onMounted(() => {
 }
 
 .app {
-    min-height: 100vh;
+
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -66,10 +66,11 @@ onMounted(() => {
     padding: var(--inner-padding);
     padding-top: 22px;
     width: 100%;
-
+   border-bottom-left-radius: 12px;
+   border-bottom-right-radius: 12px;
     background-image: url("../assets/img/moessingen_belsen.avif");
     background-size: cover;
-    background-position: 25% 75%;
+    background-position: 25% 0%;
     min-height: min-content;
 }
 </style>

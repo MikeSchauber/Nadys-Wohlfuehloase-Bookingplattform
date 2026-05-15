@@ -88,6 +88,7 @@ function setService(service: Service) {
                                 </div>
                             </CardContent>
                         </Card>
+
                     </div>
                     <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
                 </div>
@@ -242,5 +243,16 @@ function setService(service: Service) {
 .choose-btn {
     width: 100%;
     margin-top: 28px;
+}
+
+@media (max-width: 800px) {
+
+    .services,
+    .locations {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 16px;
+        width: 100%;
+    }
 }
 </style>
