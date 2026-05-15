@@ -6,6 +6,9 @@ import CardContent from '@/components/ui/card/CardContent.vue';
 import Card from '@/components/ui/card/Card.vue';
 import LoadingBanner from '@/components/shared/LoadingBanner.vue';
 import ImageZoom from './ImageZoom.vue';
+import { useI18n } from 'vue-i18n'
+
+const { n } = useI18n()
 
 
 const bookingStore = useBookingStore()
@@ -93,6 +96,10 @@ function setService(service: Service) {
                                         </span>
                                         <span> - </span>
                                         <span>{{ service.durations[service.durations.length - 1] }} Min</span>
+                                    </div>
+
+                                    <div class="service-text-description">
+                                        <span>{{ n(service.price_cents / 100, 'currency', 'de-DE') }}</span>
                                     </div>
                                 </div>
                             </CardContent>
@@ -308,6 +315,6 @@ function setService(service: Service) {
 
     .location-details {
         gap: 12px;
-    } 
+    }
 }
 </style>

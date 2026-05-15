@@ -56,7 +56,7 @@ export const useBookingStore = defineStore("booking", {
       if (!this.serviceIsSetted) {
         this.resetService()
       }
-      const services = await getTableData("services", "prio_number", true, "location_id", this.activeLocation?.id);
+      const services = await getTableData("services", "price_cents", true, "location_id", this.activeLocation?.id);
 
       this.openServiceChoosing()
 

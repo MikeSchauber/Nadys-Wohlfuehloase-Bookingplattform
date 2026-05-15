@@ -22,6 +22,7 @@
     "tailwindcss": "^4.2.2",
     "vaul-vue": "^0.4.1",
     "vue": "^3.5.32",
+    "vue-i18n": "^11.4.2",
     "vue-router": "^5.0.4"
   },
   "devDependencies": {
