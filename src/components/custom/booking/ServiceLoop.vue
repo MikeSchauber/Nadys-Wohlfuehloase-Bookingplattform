@@ -48,7 +48,7 @@ function setService(service: Service) {
                 <div class="location-container">
                     <span>Standort Wählen</span>
                     <div class="locations">
-                        <Card v-for="location, i in locations" :key="location.id" class="location-card"
+                        <Card v-for="location in locations" :key="location.id" class="location-card"
                             :class="{ active: bookingStore.activeLocation?.id === location.id }"
                             @click="getOtherServices(location)">
                             <CardContent class=" location-content">
@@ -78,7 +78,7 @@ function setService(service: Service) {
                 <div v-if="bookingStore.activeLocation" class="service-container">
                     <span>Service Wählen</span>
                     <div class="services">
-                        <Card v-for="service, i in services" :key="service.id" class="service-card"
+                        <Card v-for="service in services" :key="service.id" class="service-card"
                             :class="{ active: bookingStore.serviceId === service.id }" @click="setService(service)">
                             <CardContent class="service-content">
                                 <div class="service-img-content">

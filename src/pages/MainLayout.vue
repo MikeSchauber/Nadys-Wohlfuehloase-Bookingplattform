@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import FooterSection from '@/components/shared/FooterSection.vue';
-import { useNavigationStore } from '@/stores/navigationStore';
 import { onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useBookingStore } from '@/stores/bookingStore';
 import HeaderSection from '@/components/shared/HeaderSection.vue';
 
 const bookingStore = useBookingStore()
-const uiStore = useNavigationStore()
 const router = useRouter()
-const route = useRoute()
 
 
 onMounted(() => {
