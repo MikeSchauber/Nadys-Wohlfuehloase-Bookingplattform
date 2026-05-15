@@ -52,14 +52,6 @@ export const useBookingStore = defineStore("booking", {
 
     setTimeSlots() {
       const service = this.serviceObject;
-      console.log(service);
-
-      if (!service) return;
-
-      this.serviceDurations = Object.keys(service.duration).map((key) => ({
-        key,
-        value: service.duration[key],
-      }));
     },
 
     setDurationKey(key: string) {
