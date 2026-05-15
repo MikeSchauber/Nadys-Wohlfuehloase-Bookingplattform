@@ -1,19 +1,6 @@
 <script setup lang="ts">
 import FooterSection from '@/components/shared/FooterSection.vue';
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useBookingStore } from '@/stores/bookingStore';
 import HeaderSection from '@/components/shared/HeaderSection.vue';
-
-const bookingStore = useBookingStore()
-const router = useRouter()
-
-
-onMounted(() => {
-    if (bookingStore.serviceId === "") {
-        router.push("/bookings")
-    }
-})
 </script>
 
 <template>
