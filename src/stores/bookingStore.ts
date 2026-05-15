@@ -22,6 +22,11 @@ export const useBookingStore = defineStore("booking", {
       this.serviceObject = service;
     },
 
+    resetService() {
+      this.serviceId = "";
+      this.serviceObject = null;
+    },
+
     loadingActive() {
       this.loading = true;
     },
@@ -37,6 +42,7 @@ export const useBookingStore = defineStore("booking", {
     },
 
     async getServicesByLocation() {
+      this.resetService()
       const services = await getTableData("services", "prio_number", true, "location_id", this.locationId);
       const parsedServices = this.parseDurationsToArrays(services)
       return parsedServices

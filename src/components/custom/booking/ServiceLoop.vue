@@ -91,7 +91,8 @@ function setService(service: Service) {
             </div>
 
             <TimingDialog :-time-ranges="bookingStore.serviceObject?.duration" class="choose-btn"
-                v-if="!bookingStore.loading && bookingStore.serviceId.length > 0">
+       
+           >
             </TimingDialog>
 
         </div>

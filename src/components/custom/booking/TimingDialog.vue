@@ -34,7 +34,7 @@ function chooseService() {
 }
 
 function nextBookingStep() {
-    
+
 }
 
 </script>
@@ -43,7 +43,8 @@ function nextBookingStep() {
     <Dialog v-model:open="dialogOpen">
         <form @submit="nextBookingStep()" class="form-dialog">
             <DialogTrigger as-child>
-                <Button @click="chooseService()" class="opener-btn" variant="outline">
+                <Button @click="chooseService()" :disabled="bookingStore.serviceId.length === 0" class="opener-btn"
+                    variant="outline">
                     Bestätigen
                 </Button>
             </DialogTrigger>
