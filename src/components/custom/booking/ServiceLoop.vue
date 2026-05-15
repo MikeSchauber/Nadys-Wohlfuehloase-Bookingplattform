@@ -13,9 +13,6 @@ const bookingStore = useBookingStore()
 const services = ref<Service[]>([])
 const locations = ref<Location[]>([])
 
-// const isServiceChoosen = ref(false)
-// const choosenService = ref<Service | null>(null)
-
 onMounted(async () => {
     bookingStore.loadingActive();
 
@@ -38,12 +35,6 @@ async function getOtherServices(id: string) {
 function setService(service: Service) {
     bookingStore.setService(service)
 }
-
-// function chooseService() {
-//     bookingStore.setTimeSlots()
-//     console.log(bookingStore.serviceObject);
-
-// }
 
 </script>
 
@@ -96,28 +87,6 @@ function setService(service: Service) {
                 </div>
         </div>
 
-        <!-- <div class="service-container">
-                <span>Zeiten auswählen</span>
-                <div class="services">
-                    <Card class="service-card">
-                        <CardContent class="service-content">
-                            <div class="service-img-content">
-                                <img :src="bookingStore.serviceObject?.image_path"
-                                    :alt="bookingStore.serviceObject?.image_alt">
-                            </div>
-                            <div class="service-text-content">
-                                <h4>{{ bookingStore.serviceObject?.name }}</h4>
-                                <div class="service-text-description">
-                                    <span>{{ bookingStore.serviceObject?.description }}</span>
-                                    <span v-for="(minutes, key) in bookingStore.serviceObject?.duration" :key="key">
-                                        {{ minutes }} Min <span> - </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
-            </div> -->
         <TimingDialog :-time-ranges="bookingStore.serviceObject?.duration" class="choose-btn"
             v-if="!bookingStore.loading && bookingStore.serviceId.length > 0">
         </TimingDialog>
