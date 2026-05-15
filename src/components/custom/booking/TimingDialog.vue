@@ -16,25 +16,27 @@ import SelectItem from '@/components/ui/select/SelectItem.vue';
 import SelectTrigger from '@/components/ui/select/SelectTrigger.vue';
 import SelectValue from '@/components/ui/select/SelectValue.vue';
 import { useBookingStore } from '@/stores/bookingStore';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const bookingStore = useBookingStore()
 
-const props = defineProps<{
-    TimeRanges: Record<string, number>
-}>()
-
 const dialogOpen = ref(false)
-
-function chooseService() {
-    bookingStore.setTimeSlots()
-}
 
 function nextBookingStep() {
     bookingStore.nextBookingStep()
+    bookingStore.closeServiceChoosing()
     dialogOpen.value = false
-
 }
+
+// watch(
+//     () => dialogOpen.value,
+//     (isOpen) => {
+//         if (isOpen) {
+//             bookingStore.resetDuration()
+//         }
+
+//     }
+// )
 
 </script>
 
@@ -42,8 +44,7 @@ function nextBookingStep() {
     <Dialog v-model:open="dialogOpen">
 
         <DialogTrigger as-child>
-            <Button @click="chooseService()" :disabled="bookingStore.serviceId.length === 0" class="opener-btn"
-                variant="outline">
+            <Button :disabled="bookingStore.serviceId.length === 0" class="opener-btn" variant="outline">
                 Bestätigen
             </Button>
         </DialogTrigger>
@@ -57,7 +58,7 @@ function nextBookingStep() {
                 </DialogHeader>
                 <div class="grid gap-4">
                     <div class="grid gap-3 booking-dialog-select">
-                        <Select>
+                        <Select v-model="bookingStore.duration">
                             <SelectTrigger>
                                 <SelectValue placeholder="Zeitraum auswählen" />
                             </SelectTrigger>
@@ -72,7 +73,7 @@ function nextBookingStep() {
                 </div>
                 <DialogFooter>
                     <DialogClose as-child>
-                        <Button @click="bookingStore.resetDuration()" variant="outline">
+                        <Button @click="" variant="outline">
                             Abbrechen
                         </Button>
                     </DialogClose>

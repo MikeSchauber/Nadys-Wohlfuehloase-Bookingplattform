@@ -17,7 +17,10 @@ onMounted(async () => {
     bookingStore.loadingActive();
 
     locations.value = await bookingStore.getLocations()
-    // services.value = await bookingStore.getServicesByLocation()
+    if (bookingStore.locationId) {
+        services.value = await bookingStore.getServicesByLocation()
+    }
+
     bookingStore.loadingDisabled();
 
 })
@@ -90,8 +93,7 @@ function setService(service: Service) {
                 </div>
             </div>
 
-            <TimingDialog :-time-ranges="bookingStore.activeService?.durations" class="choose-btn">
-            </TimingDialog>
+
 
         </div>
     </div>

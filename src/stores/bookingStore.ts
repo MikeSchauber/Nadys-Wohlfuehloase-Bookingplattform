@@ -9,6 +9,7 @@ export const useBookingStore = defineStore("booking", {
     locationId: "",
     duration: "",
     currentStep: 1,
+    serviceIsSetted: false
   }),
   getters: {},
   actions: {
@@ -20,11 +21,21 @@ export const useBookingStore = defineStore("booking", {
     setService(service: Service) {
       this.serviceId = service.id;
       this.activeService = service;
+      this.duration = ""
     },
 
     resetService() {
       this.serviceId = "";
       this.activeService = null;
+
+    },
+
+    resetDuration() {
+      this.duration = ""
+    },
+
+    resetLocation() {
+      this.locationId = ""
     },
 
     loadingActive() {
@@ -42,27 +53,37 @@ export const useBookingStore = defineStore("booking", {
     },
 
     async getServicesByLocation() {
-      this.resetService()
+      if (!this.serviceIsSetted) {
+        this.resetService()
+      }
       const services = await getTableData("services", "prio_number", true, "location_id", this.locationId);
-      console.log(services);
+
+      this.openServiceChoosing()
 
       return services
     },
 
-    setTimeSlots() {
-      const service = this.activeService;
+    closeServiceChoosing() {
+      this.serviceIsSetted = true;
+    },
+
+    openServiceChoosing() {
+      this.serviceIsSetted = false;
     },
 
     setDuration(duration: string) {
       this.duration = duration;
     },
 
-    resetDuration() {
-      this.duration = ""
+    nextBookingStep() {
+      this.currentStep += 1;
     },
 
-    nextBookingStep() {
-      this.currentStep += 1
+    previousBookingStep() {
+      // this.resetDuration();
+      // this.resetService();
+      // this.resetLocation();
+      this.currentStep -= 1;
     }
   },
 });
