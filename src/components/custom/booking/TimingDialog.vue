@@ -16,7 +16,7 @@ import SelectItem from '@/components/ui/select/SelectItem.vue';
 import SelectTrigger from '@/components/ui/select/SelectTrigger.vue';
 import SelectValue from '@/components/ui/select/SelectValue.vue';
 import { useBookingStore } from '@/stores/bookingStore';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 const bookingStore = useBookingStore()
 

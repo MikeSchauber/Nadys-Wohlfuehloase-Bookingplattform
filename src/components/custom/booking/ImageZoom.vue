@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
-import CardDescription from '@/components/ui/card/CardDescription.vue';
 import {
     Dialog,
     DialogContent,

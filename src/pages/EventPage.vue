@@ -1,3 +1,8 @@
+<script setup lang="ts">
+
+
+</script>
+
 <template>
     <div class="events-container">
 
@@ -7,14 +12,12 @@
     </div>
 </template>
 
-<script setup lang="ts">
 
-
-</script>
 
 <style scoped>
 .events-container {
     color: var(--primary);
+
     h1 {
         color: var(--primary);
         margin: 0;

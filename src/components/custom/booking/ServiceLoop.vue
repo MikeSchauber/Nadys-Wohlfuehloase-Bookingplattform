@@ -5,8 +5,6 @@ import { useBookingStore } from '@/stores/bookingStore';
 import CardContent from '@/components/ui/card/CardContent.vue';
 import Card from '@/components/ui/card/Card.vue';
 import LoadingBanner from '@/components/shared/LoadingBanner.vue';
-import TimingDialog from './TimingDialog.vue';
-import { Search, ZoomIn } from 'lucide-vue-next';
 import ImageZoom from './ImageZoom.vue';
 
 

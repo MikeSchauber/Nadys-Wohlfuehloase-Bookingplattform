@@ -1,3 +1,17 @@
+<script setup lang="ts">
+
+import ServiceLoop from '@/components/custom/booking/ServiceLoop.vue';
+import TimingDialog from '@/components/custom/booking/TimingDialog.vue';
+import StepperBookings from '@/components/custom/StepperBookings.vue';
+import Button from '@/components/ui/button/Button.vue';
+import { useBookingStore } from '@/stores/bookingStore';
+
+const bookingStore = useBookingStore()
+
+
+
+</script>
+
 <template>
     <div class="booking-page">
         <StepperBookings></StepperBookings>
@@ -15,19 +29,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
 
-import ServiceLoop from '@/components/custom/booking/ServiceLoop.vue';
-import TimingDialog from '@/components/custom/booking/TimingDialog.vue';
-import StepperBookings from '@/components/custom/StepperBookings.vue';
-import Button from '@/components/ui/button/Button.vue';
-import { useBookingStore } from '@/stores/bookingStore';
-
-const bookingStore = useBookingStore()
-
-
-
-</script>
 
 <style scoped>
 .booking-page {

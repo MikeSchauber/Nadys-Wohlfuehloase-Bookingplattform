@@ -1,17 +1,3 @@
-<template>
-    <div class="page">
-        <div class="app">
-            <div class="header-section">
-                <HeaderSection></HeaderSection>
-            </div>
-            <div class="inner-router">
-                <router-view></router-view>
-            </div>
-        </div>
-        <FooterSection></FooterSection>
-    </div>
-</template>
-
 <script setup lang="ts">
 import FooterSection from '@/components/shared/FooterSection.vue';
 import { useNavigationStore } from '@/stores/navigationStore';
@@ -32,6 +18,22 @@ onMounted(() => {
     }
 })
 </script>
+
+<template>
+    <div class="page">
+        <div class="app">
+            <div class="header-section">
+                <HeaderSection></HeaderSection>
+            </div>
+            <div class="inner-router">
+                <router-view></router-view>
+            </div>
+        </div>
+        <FooterSection></FooterSection>
+    </div>
+</template>
+
+
 
 <style scoped>
 .page {
