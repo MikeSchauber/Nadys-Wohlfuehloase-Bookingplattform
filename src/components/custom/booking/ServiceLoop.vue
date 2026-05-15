@@ -49,8 +49,8 @@ function setService(service: Service) {
 
 <template>
     <div>
-        <div class="booking-container">
-            <div>
+        <div>
+            <div class="booking-container">
                 <div class="location-container">
                     <span>Standort Wählen</span>
                     <div class="locations">
@@ -94,9 +94,9 @@ function setService(service: Service) {
                         </Card>
                     </div>
                 </div>
-            </div>
+        </div>
 
-            <!-- <div class="service-container">
+        <!-- <div class="service-container">
                 <span>Zeiten auswählen</span>
                 <div class="services">
                     <Card class="service-card">
@@ -118,11 +118,11 @@ function setService(service: Service) {
                     </Card>
                 </div>
             </div> -->
-            <TimingDialog :-time-ranges="bookingStore.serviceObject?.duration" class="choose-btn"
-                v-if="!bookingStore.loading && bookingStore.serviceId.length > 0">
-            </TimingDialog>
-            <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
-        </div>
+        <TimingDialog :-time-ranges="bookingStore.serviceObject?.duration" class="choose-btn"
+            v-if="!bookingStore.loading && bookingStore.serviceId.length > 0">
+        </TimingDialog>
+        <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
+    </div>
     </div>
 </template>
 
@@ -150,14 +150,18 @@ function setService(service: Service) {
 }
 
 .booking-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 38px;
-    height: 100%;
-    color: var(--primary);
+
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 38px;
+        height: 100%;
+        color: var(--primary);
+        margin-bottom: 24px
+    
+
 }
 
 .service-container,

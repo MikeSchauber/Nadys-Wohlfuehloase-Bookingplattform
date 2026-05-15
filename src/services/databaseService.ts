@@ -1,5 +1,6 @@
 import { supabase } from "@/supabase/supabase";
 
+
 export const getTableData = async (
   table: string,
   orderedBy: string,
