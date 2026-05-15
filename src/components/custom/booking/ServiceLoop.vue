@@ -209,9 +209,11 @@ function setService(service: Service) {
 
     .service-img-content>img {
         height: 100px;
-        width: auto;
+        max-width: 100px;
+        object-fit: cover;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
+        background-size: cover;
     }
 }
 
@@ -227,7 +229,8 @@ function setService(service: Service) {
 
     .service-img-content>img {
         height: 100px;
-        width: auto;
+        width: 100px;
+        object-fit: cover;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
     }
@@ -247,7 +250,6 @@ function setService(service: Service) {
     justify-content: center;
     gap: 0px;
     height: 100%;
-    padding-right: 12px;
 
 
 
@@ -290,5 +292,22 @@ function setService(service: Service) {
         gap: 16px;
         width: 100%;
     }
+
+    .service-content,
+    .location-content {
+        padding-right: 12px;
+    }
+
+    .location-content {
+        gap: 0px;
+    }
+
+    .service-content {
+        gap: 12px;
+    }
+
+    .location-details {
+        gap: 12px;
+    } 
 }
 </style>
