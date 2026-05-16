@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+import FindAppointment from '@/components/custom/booking/FindAppointment.vue';
 import ServiceLoop from '@/components/custom/booking/ServiceLoop.vue';
 import TimingDialog from '@/components/custom/booking/TimingDialog.vue';
 import StepperBookings from '@/components/custom/StepperBookings.vue';
@@ -15,10 +16,9 @@ const bookingStore = useBookingStore()
 <template>
     <div class="booking-page">
         <StepperBookings></StepperBookings>
-
-
         <div>
             <ServiceLoop v-if="bookingStore.currentStep === 1"></ServiceLoop>
+            <FindAppointment v-if="bookingStore.currentStep === 2"></FindAppointment>
         </div>
         <div class="navigaton-button-section">
             <Button v-if="bookingStore.currentStep > 1" @click="bookingStore.previousBookingStep()">Zurück</Button>

@@ -45,73 +45,66 @@ function setService(service: Service) {
 </script>
 
 <template>
-    <div>
-        <div>
-            <div class="booking-container">
-                <div class="location-container">
-                    <span>Standort Wählen</span>
-                    <div class="locations">
-                        <Card v-for="location in locations" :key="location.id" class="location-card"
-                            :class="{ active: bookingStore.activeLocation?.id === location.id }"
-                            @click="getOtherServices(location)">
-                            <CardContent class=" location-content">
-                                <!-- <span>{{ location.emoji }}</span> -->
-                                <div class="location-details">
-                                    <div class="service-img-content">
-                                        <img :src="location.image_path" :alt="location.image_alt">
-                                    </div>
-                                    <div class="location-text-content">
-                                        <h4>{{ location.name }}</h4>
-                                        <div class="location-text-description">
-                                            <span>{{ location.address }}</span>
-                                        </div>
-                                    </div>
+    <div class="booking-container">
+        <div class="location-container">
+            <span>Standort Wählen</span>
+            <div class="locations">
+                <Card v-for="location in locations" :key="location.id" class="location-card"
+                    :class="{ active: bookingStore.activeLocation?.id === location.id }"
+                    @click="getOtherServices(location)">
+                    <CardContent class=" location-content">
+                        <!-- <span>{{ location.emoji }}</span> -->
+                        <div class="location-details">
+                            <div class="service-img-content">
+                                <img :src="location.image_path" :alt="location.image_alt">
+                            </div>
+                            <div class="location-text-content">
+                                <h4>{{ location.name }}</h4>
+                                <div class="location-text-description">
+                                    <span>{{ location.address }}</span>
                                 </div>
-                                <div>
-                                    <span>
-                                        <ImageZoom></ImageZoom>
-                                    </span>
-                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>
+                                <ImageZoom></ImageZoom>
+                            </span>
+                        </div>
 
-                            </CardContent>
-                        </Card>
-                    </div>
-                </div>
-
-                <div v-if="bookingStore.activeLocation" class="service-container">
-                    <span>Service Wählen</span>
-                    <div class="services">
-                        <Card v-for="service in services" :key="service.id" class="service-card"
-                            :class="{ active: bookingStore.serviceId === service.id }" @click="setService(service)">
-                            <CardContent class="service-content">
-                                <div class="service-img-content">
-                                    <img :src="service.image_path" :alt="service.image_alt">
-                                </div>
-                                <div class="service-text-content">
-                                    <h4>{{ service.name }}</h4>
-                                    <div class="service-text-description">
-                                        <span>{{ service.description }}</span>
-                                        <span>
-                                            {{ service.durations[0] }} Min
-                                        </span>
-                                        <span> - </span>
-                                        <span>{{ service.durations[service.durations.length - 1] }} Min</span>
-                                    </div>
-
-                                    <div class="service-text-description">
-                                        <span>{{ n(service.price_cents / 100, 'currency', 'de-DE') }}</span>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                    </div>
-                    <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
-                </div>
+                    </CardContent>
+                </Card>
             </div>
+        </div>
 
+        <div v-if="bookingStore.activeLocation" class="service-container">
+            <span>Service Wählen</span>
+            <div class="services">
+                <Card v-for="service in services" :key="service.id" class="service-card"
+                    :class="{ active: bookingStore.serviceId === service.id }" @click="setService(service)">
+                    <CardContent class="service-content">
+                        <div class="service-img-content">
+                            <img :src="service.image_path" :alt="service.image_alt">
+                        </div>
+                        <div class="service-text-content">
+                            <h4>{{ service.name }}</h4>
+                            <div class="service-text-description">
+                                <span>{{ service.description }}</span>
+                                <span>
+                                    {{ service.durations[0] }} Min
+                                </span>
+                                <span> - </span>
+                                <span>{{ service.durations[service.durations.length - 1] }} Min</span>
+                            </div>
 
+                            <div class="service-text-description">
+                                <span>{{ n(service.price_cents / 100, 'currency', 'de-DE') }}</span>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
 
+            </div>
+            <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
         </div>
     </div>
 </template>

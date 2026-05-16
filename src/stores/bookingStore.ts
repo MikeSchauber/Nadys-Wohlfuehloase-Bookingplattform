@@ -8,7 +8,7 @@ export const useBookingStore = defineStore("booking", {
     activeLocation: null as Location | null,
     activeService: null as Service | null,
     duration: "",
-    currentStep: 1,
+    currentStep: 2,
     serviceIsSetted: false
   }),
   getters: {},
