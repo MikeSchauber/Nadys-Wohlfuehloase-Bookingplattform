@@ -25,7 +25,6 @@ onMounted(async () => {
     }
 
     bookingStore.loadingDisabled();
-
 })
 
 async function getOtherServices(location: Location) {
