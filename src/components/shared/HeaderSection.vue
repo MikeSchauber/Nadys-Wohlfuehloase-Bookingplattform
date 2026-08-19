@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { useRoute, useRouter } from 'vue-router';
+import Button from '../ui/button/Button.vue';
+
+
+const route = useRoute()
+const router = useRouter()
+</script>
+
 <template>
     <header>
         <div class="main-header">
@@ -25,15 +34,6 @@
         </div>
     </header>
 </template>
-
-<script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router';
-import Button from '../ui/button/Button.vue';
-
-
-const route = useRoute()
-const router = useRouter()
-</script>
 
 <style scoped>
 header {

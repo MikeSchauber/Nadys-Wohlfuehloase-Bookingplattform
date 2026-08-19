@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { House } from 'lucide-vue-next';
+import Button from '../ui/button/Button.vue';
+</script>
+
 <template>
     <footer class="footer">
         <a href="https://www.nady-artist-of-live.de/">
@@ -14,10 +19,7 @@
     </footer>
 </template>
 
-<script setup lang="ts">
-import { House, MoveLeft } from 'lucide-vue-next';
-import Button from '../ui/button/Button.vue';
-</script>
+
 
 <style scoped>
 .footer {

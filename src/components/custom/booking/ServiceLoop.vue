@@ -5,7 +5,10 @@ import { useBookingStore } from '@/stores/bookingStore';
 import CardContent from '@/components/ui/card/CardContent.vue';
 import Card from '@/components/ui/card/Card.vue';
 import LoadingBanner from '@/components/shared/LoadingBanner.vue';
-import TimingDialog from './TimingDialog.vue';
+import ImageZoom from './ImageZoom.vue';
+import { useI18n } from 'vue-i18n'
+
+const { n } = useI18n()
 
 
 const bookingStore = useBookingStore()
@@ -17,19 +20,18 @@ onMounted(async () => {
     bookingStore.loadingActive();
 
     locations.value = await bookingStore.getLocations()
-    if (bookingStore.locationId) {
+    if (bookingStore.activeLocation) {
         services.value = await bookingStore.getServicesByLocation()
     }
 
     bookingStore.loadingDisabled();
-
 })
 
-async function getOtherServices(id: string) {
-    if (id !== bookingStore.locationId) {
+async function getOtherServices(location: Location) {
+    if (location.id !== bookingStore.activeLocation?.id) {
         bookingStore.loadingActive();
         services.value = [];
-        bookingStore.setLocationId(id)
+        bookingStore.setLocation(location)
         services.value = await bookingStore.getServicesByLocation()
         bookingStore.loadingDisabled();
     }
@@ -42,59 +44,66 @@ function setService(service: Service) {
 </script>
 
 <template>
-    <div>
-        <div>
-            <div class="booking-container">
-                <div class="location-container">
-                    <span>Standort Wählen</span>
-                    <div class="locations">
-                        <Card v-for="location, i in locations" :key="location.id" class="location-card"
-                            :class="{ active: bookingStore.locationId === location.id }"
-                            @click="getOtherServices(location.id)">
-                            <CardContent class=" location-content">
-                                <span>{{ location.emoji }}</span>
-                                <div class="location-text-content">
-
-                                    <h4>{{ location.name }}</h4>
-                                    <div class="location-text-description">
-                                        <span>{{ location.address }}</span>
-                                    </div>
+    <div class="booking-container">
+        <div class="location-container">
+            <span>Standort Wählen</span>
+            <div class="locations">
+                <Card v-for="location in locations" :key="location.id" class="location-card"
+                    :class="{ active: bookingStore.activeLocation?.id === location.id }"
+                    @click="getOtherServices(location)">
+                    <CardContent class=" location-content">
+                        <!-- <span>{{ location.emoji }}</span> -->
+                        <div class="location-details">
+                            <div class="service-img-content">
+                                <img :src="location.image_path" :alt="location.image_alt">
+                            </div>
+                            <div class="location-text-content">
+                                <h4>{{ location.name }}</h4>
+                                <div class="location-text-description">
+                                    <span>{{ location.address }}</span>
                                 </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>
+                                <ImageZoom></ImageZoom>
+                            </span>
+                        </div>
 
-                            </CardContent>
-                        </Card>
-                    </div>
-                </div>
-
-                <div v-if="bookingStore.locationId" class="service-container">
-                    <span>Service Wählen</span>
-                    <div class="services">
-                        <Card v-for="service, i in services" :key="service.id" class="service-card"
-                            :class="{ active: bookingStore.serviceId === service.id }" @click="setService(service)">
-                            <CardContent class="service-content">
-                                <div class="service-img-content">
-                                    <img :src="service.image_path" :alt="service.image_alt">
-                                </div>
-                                <div class="service-text-content">
-                                    <h4>{{ service.name }}</h4>
-                                    <div class="service-text-description">
-                                        <span>{{ service.description }}</span>
-                                        <span>
-                                            {{ service.durations[0] }} Min
-                                        </span>
-                                        <span> - </span>
-                                        <span>{{ service.durations[service.durations.length - 1] }} Min</span>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-                    <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
-                </div>
+                    </CardContent>
+                </Card>
             </div>
+        </div>
 
+        <div v-if="bookingStore.activeLocation" class="service-container">
+            <span>Service Wählen</span>
+            <div class="services">
+                <Card v-for="service in services" :key="service.id" class="service-card"
+                    :class="{ active: bookingStore.serviceId === service.id }" @click="setService(service)">
+                    <CardContent class="service-content">
+                        <div class="service-img-content">
+                            <img :src="service.image_path" :alt="service.image_alt">
+                        </div>
+                        <div class="service-text-content">
+                            <h4>{{ service.name }}</h4>
+                            <div class="service-text-description">
+                                <span>{{ service.description }}</span>
+                                <span>
+                                    {{ service.durations[0] }} Min
+                                </span>
+                                <span> - </span>
+                                <span>{{ service.durations[service.durations.length - 1] }} Min</span>
+                            </div>
 
+                            <div class="service-text-description">
+                                <span>{{ n(service.price_cents / 100, 'currency', 'de-DE') }}</span>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
 
+            </div>
+            <LoadingBanner v-if="bookingStore.loading"></LoadingBanner>
         </div>
     </div>
 </template>
@@ -144,6 +153,10 @@ function setService(service: Service) {
     gap: 20px;
     padding: 0 !important;
 
+    >span {
+        font-weight: bolder;
+    }
+
     >h2 {
         color: var(--primary);
     }
@@ -156,21 +169,24 @@ function setService(service: Service) {
     cursor: pointer;
     transition: all 150ms ease-in-out;
     color: var(--primary);
+    border: none;
+    box-shadow: 0px 0px 6px 0px rgba(49, 49, 49, 0.448);
 
     &:hover {
-        background-color: color-mix(in srgb, var(--primary-hover) 20%, transparent);
-        border-color: var(--primary-hover);
+        background-color: var(--primary-hover);
         transform: scale(1.01);
-        box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.45);
+        box-shadow: 0px 0px 8px 0px rgb(49, 49, 49);
+        color: white;
     }
 }
 
 /* Animation */
 .active {
-    background-color: color-mix(in srgb, var(--primary-hover) 20%, transparent);
+    background-color: var(--primary-hover);
     border-color: var(--primary-hover);
     transform: scale(1.01);
-    box-shadow: 0px 0px 8px 2px rgba(133, 133, 133, 0.45);
+    box-shadow: 0px 0px 8px 0px rgb(49, 49, 49);
+    color: white;
 }
 
 .no-animation {
@@ -185,20 +201,45 @@ function setService(service: Service) {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
     padding: 0;
+    padding-right: 28px;
 
     .service-img-content>img {
         height: 100px;
-        width: auto;
+        max-width: 100px;
+        object-fit: cover;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-size: cover;
+    }
+}
+
+.service-content {
+    justify-content: flex-start;
+}
+
+.location-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+    .service-img-content>img {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
     }
 }
 
-.location-content {
-    padding: 12px 24px;
-}
+
+
+/* .location-content {
+        padding: 12px 24px;
+    } */
 
 .service-text-content,
 .location-text-content {
@@ -208,7 +249,6 @@ function setService(service: Service) {
     justify-content: center;
     gap: 0px;
     height: 100%;
-    padding-right: 12px;
 
 
 
@@ -240,5 +280,33 @@ function setService(service: Service) {
 .choose-btn {
     width: 100%;
     margin-top: 28px;
+}
+
+@media (max-width: 800px) {
+
+    .services,
+    .locations {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 16px;
+        width: 100%;
+    }
+
+    .service-content,
+    .location-content {
+        padding-right: 12px;
+    }
+
+    .location-content {
+        gap: 0px;
+    }
+
+    .service-content {
+        gap: 12px;
+    }
+
+    .location-details {
+        gap: 12px;
+    }
 }
 </style>

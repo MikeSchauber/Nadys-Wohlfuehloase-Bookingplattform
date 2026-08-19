@@ -20,4 +20,6 @@ export interface Location {
   created_at: string;
   emoji: string;
   prio_number: number;
+  image_path: string;
+  image_alt: string
 }

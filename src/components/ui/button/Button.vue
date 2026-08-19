@@ -30,12 +30,21 @@ const props = withDefaults(defineProps<Props>(), {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
+
   }
+
+  /* button:disabled {
+    opacity: 100% !important;
+    background-color: rgb(174, 174, 174) !important;
+    color: black !important;
+    
+  } */
 }
 
 .button {
   background-color: var(--primary);
   color: var(--text-foreground);
+  border: none;
 }
 
 .button:hover {

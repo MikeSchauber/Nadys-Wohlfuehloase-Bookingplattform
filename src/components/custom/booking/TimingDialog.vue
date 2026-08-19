@@ -16,7 +16,8 @@ import SelectItem from '@/components/ui/select/SelectItem.vue';
 import SelectTrigger from '@/components/ui/select/SelectTrigger.vue';
 import SelectValue from '@/components/ui/select/SelectValue.vue';
 import { useBookingStore } from '@/stores/bookingStore';
-import { ref, watch } from 'vue';
+import { MoveRight } from 'lucide-vue-next';
+import { ref } from 'vue';
 
 const bookingStore = useBookingStore()
 
@@ -28,16 +29,6 @@ function nextBookingStep() {
     dialogOpen.value = false
 }
 
-// watch(
-//     () => dialogOpen.value,
-//     (isOpen) => {
-//         if (isOpen) {
-//             bookingStore.resetDuration()
-//         }
-
-//     }
-// )
-
 </script>
 
 <template>
@@ -45,7 +36,8 @@ function nextBookingStep() {
 
         <DialogTrigger as-child>
             <Button :disabled="bookingStore.serviceId.length === 0" class="opener-btn" variant="outline">
-                Bestätigen
+                Weiter zu Termin
+                <MoveRight />
             </Button>
         </DialogTrigger>
         <DialogContent class="sm:max-w-[425px]">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import {  watch } from 'vue'
 import { Calendar, BookCheck, PersonStanding, TowelRack } from 'lucide-vue-next'
 import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSeparator, StepperTitle, StepperTrigger } from '@/components/ui/stepper'
 import { useBookingStore } from '@/stores/bookingStore'
@@ -63,7 +63,7 @@ watch(
 }
 
 .icons {
-    transform: scale(1.2);
+    /* transform: scale(1.2); */
 }
 
 @media(max-width: 800px) {

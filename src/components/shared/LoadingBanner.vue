@@ -1,16 +1,18 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
     <div class="loader-container">
         <div class="loader"></div>
     </div>
 </template>
 
-<script setup lang="ts">
 
-</script>
 
 <style scoped>
 .loader-container {
-    height:500px;
+    height: 320px;
     width: 100%;
     display: flex;
     justify-content: center;
