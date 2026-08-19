@@ -25,6 +25,10 @@ const bookingStore = useBookingStore()
             <TimingDialog v-if="bookingStore.currentStep === 1" :-time-ranges="bookingStore.activeService?.durations"
                 class="choose-btn">
             </TimingDialog>
+            <Button v-if="bookingStore.currentStep === 2" :disabled="!bookingStore.selectedSlot"
+                class="choose-btn" @click="bookingStore.nextBookingStep()">
+                Weiter zu Kontakt →
+            </Button>
         </div>
     </div>
 </template>

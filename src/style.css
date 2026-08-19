@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
@@ -12,6 +12,7 @@
   --foreground: oklch(0.22 0.02 285);
 
   --primary: #874295;
+  --primary-dark: #620674;
   --primary-foreground: oklch(0.98 0 0);
   --primary-hover: oklch(69.35% 0.19056 299.996);
 
@@ -42,8 +43,10 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --ff-body: 'Inter', system-ui, sans-serif;
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --sans: var(--ff-body);
+  --heading: var(--ff-display);
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);

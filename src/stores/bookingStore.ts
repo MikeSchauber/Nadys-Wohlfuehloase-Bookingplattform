@@ -8,8 +8,9 @@ export const useBookingStore = defineStore("booking", {
     activeLocation: null as Location | null,
     activeService: null as Service | null,
     duration: "",
-    currentStep: 2,
-    serviceIsSetted: false
+    currentStep: 1,
+    serviceIsSetted: false,
+    selectedSlot: null as { start: string; end: string } | null
   }),
   getters: {},
   actions: {
@@ -22,6 +23,7 @@ export const useBookingStore = defineStore("booking", {
       this.serviceId = service.id;
       this.activeService = service;
       this.duration = ""
+      this.selectedSlot = null
     },
 
     resetService() {
@@ -73,6 +75,15 @@ export const useBookingStore = defineStore("booking", {
 
     setDuration(duration: string) {
       this.duration = duration;
+      this.selectedSlot = null;
+    },
+
+    setSlot(startISO: string, endISO: string) {
+      this.selectedSlot = { start: startISO, end: endISO };
+    },
+
+    resetSlot() {
+      this.selectedSlot = null;
     },
 
     nextBookingStep() {
